@@ -1,2 +1,3 @@
+/vendor/
 /vendors/*/vendor
 /vendors/*/composer.lock
