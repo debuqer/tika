@@ -1,0 +1,18 @@
+{
+    "name": "debuqer/tika",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tika\\": "framework/"
+        }
+    },
+    "authors": [
+        {
+            "name": "debuqer",
+            "email": "bagher2g@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
