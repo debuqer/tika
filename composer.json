@@ -1,10 +1,11 @@
 {
     "name": "debuqer/tika",
-    "type": "project",
+    "description": "php flexible form builder",
+    "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Tika\\": "framework/"
+            "Debuqer\\Tika\\": "src/"
         }
     },
     "authors": [
