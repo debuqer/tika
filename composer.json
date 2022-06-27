@@ -17,5 +17,10 @@
     "minimum-stability": "dev",
     "require-dev": {
         "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+        "update-snapshots": "./vendor/bin/phpunit --no-coverage -d --update-snapshots",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --debug --coverage-html coverage"
     }
 }
