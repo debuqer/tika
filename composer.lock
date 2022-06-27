@@ -4,8 +4,139 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a15ef1c98b6b4d7beaf80cece7cc0c4d",
-    "packages": [],
+    "content-hash": "514ba0cedbf64c729901057d066619d7",
+    "packages": [
+        {
+            "name": "loophp/collection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/loophp/collection.git",
+                "reference": "a168b6da6b9a5751e8c2950da58378afacc9df70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/loophp/collection/zipball/a168b6da6b9a5751e8c2950da58378afacc9df70",
+                "reference": "a168b6da6b9a5751e8c2950da58378afacc9df70",
+                "shasum": ""
+            },
+            "require": {
+                "loophp/iterators": "^1.6",
+                "php": ">= 7.4"
+            },
+            "require-dev": {
+                "amphp/parallel-functions": "^1",
+                "doctrine/collections": "^1.6",
+                "drupol/php-conventions": "^5",
+                "infection/infection": "^0.26.0",
+                "loophp/phpunit-iterable-assertions": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/php-code-coverage": "^9.2",
+                "phpunit/phpunit": "^9.5",
+                "psr/cache": "^1.0 || ^2.0",
+                "symfony/cache": "^5"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "loophp\\collection\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pol Dellaiera",
+                    "email": "pol.dellaiera@protonmail.com",
+                    "homepage": "https://not-a-number.io",
+                    "role": "author"
+                }
+            ],
+            "description": "A (memory) friendly, easy, lazy and modular collection class.",
+            "homepage": "https://github.com/loophp/collection",
+            "keywords": [
+                "collection",
+                "generator",
+                "iterator",
+                "yield"
+            ],
+            "support": {
+                "docs": "https://loophp-collection.rtfd.io",
+                "issues": "https://github.com/loophp/collection/issues",
+                "source": "https://github.com/loophp/collection"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/drupol",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-06-24T21:03:43+00:00"
+        },
+        {
+            "name": "loophp/iterators",
+            "version": "1.6.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/loophp/iterators.git",
+                "reference": "4c04f6a5449603817d9ea8806cef40df962dc6af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/loophp/iterators/zipball/4c04f6a5449603817d9ea8806cef40df962dc6af",
+                "reference": "4c04f6a5449603817d9ea8806cef40df962dc6af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7.4"
+            },
+            "require-dev": {
+                "drupol/php-conventions": "^5",
+                "infection/infection": "^0.26",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/php-code-coverage": "^9.2",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "loophp\\iterators\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pol Dellaiera",
+                    "email": "pol.dellaiera@protonmail.com",
+                    "homepage": "https://not-a-number.io",
+                    "role": "author"
+                }
+            ],
+            "description": "The missing PHP iterators.",
+            "homepage": "https://github.com/loophp/iterators",
+            "keywords": [
+                "iterators"
+            ],
+            "support": {
+                "issues": "https://github.com/loophp/iterators/issues",
+                "source": "https://github.com/loophp/iterators"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/drupol",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-06-25T17:45:18+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -2037,7 +2168,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "loophp/collection": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

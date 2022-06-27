@@ -22,5 +22,8 @@
         "update-snapshots": "./vendor/bin/phpunit --no-coverage -d --update-snapshots",
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --debug --coverage-html coverage"
+    },
+    "require": {
+        "loophp/collection": "dev-master"
     }
 }
