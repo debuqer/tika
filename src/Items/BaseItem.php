@@ -16,7 +16,16 @@ abstract class BaseItem implements ItemInterface
      * @var string $label
      */
     protected $label;
+
     /**
+     * @var string
+     */
+    protected $default_name = '';
+
+    /**
+     * @var string
+     */
+    protected $default_label = '';
 
     /**
      * @var Collection $items
@@ -28,7 +37,7 @@ abstract class BaseItem implements ItemInterface
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->name ?? $this->default_name;
     }
 
     /**
@@ -36,6 +45,22 @@ abstract class BaseItem implements ItemInterface
      */
     public function getLabel(): string
     {
-        return $this->label;
+        return $this->label ?? $this->default_label;
+    }
+
+    /**
+     * @param $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
     }
 }

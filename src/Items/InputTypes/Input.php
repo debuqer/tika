@@ -14,6 +14,14 @@ class Input extends BaseItem
      */
     protected $attributes;
 
+    public function __construct($attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * @return array|mixed
+     */
     public function getSchema()
     {
         $schema = [];
