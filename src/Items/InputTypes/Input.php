@@ -24,8 +24,14 @@ class Input extends BaseItem
      */
     public function getSchema()
     {
-        $schema = [];
+        return [
+            'attributes' => $this->getAttributes()
+        ];
+    }
 
+    protected function getAttributes()
+    {
+        $attributes = [];
         foreach ($this->attributes as $attribute) {
             $attributeProviderClass = $attribute['provider'];
             /**
@@ -33,9 +39,9 @@ class Input extends BaseItem
              */
             $attributeProvider = new $attributeProviderClass($attribute['params']);
 
-            $schema = array_merge($schema, $attributeProvider->getSchema());
+            $attributes = array_merge($attributes, $attributeProvider->getSchema());
         }
 
-        return $schema;
+        return $attributes;
     }
 }
