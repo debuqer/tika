@@ -25,11 +25,30 @@ class Input extends BaseItem
     public function getSchema()
     {
         return [
-            'attributes' => $this->getAttributes()
+            'attributes' => $this->getAttributesSchema()
         ];
     }
 
-    protected function getAttributes()
+    /**
+     * @param array $attributes
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getAttributesSchema()
     {
         $attributes = [];
         foreach ($this->attributes as $attribute) {
