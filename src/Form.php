@@ -19,6 +19,8 @@ class Form
     public function __construct()
     {
         $this->group = new Group();
+
+        $this->group->setName('main');
     }
 
     public function getSchema()

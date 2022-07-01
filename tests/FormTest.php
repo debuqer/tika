@@ -9,11 +9,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
 
         $item = new \Debuqer\Tika\Items\InputTypes\Input([]);
 
-        $form->setItem($item);
-        $form->setItem($item);
-        $form->setItem($item);
-        $form->setItem($item);
-        $form->setItem($item);
+        $form->setItem($item->setName('a'));
+        $form->setItem($item->setName('b'));
+        $form->setItem($item->setName('c'));
+        $form->setItem($item->setName('d'));
+        $form->setItem($item->setName('e'));
 
         $schema = $form->getSchema();
 

@@ -43,9 +43,6 @@ class Group extends BaseItem
     {
         $newItem = clone $item;
 
-        $newItem->setName('item_'.count($this->items));
-        $newItem->setLabel('item_'.count($this->items));
-
         $this->items[] = $newItem;
     }
 }

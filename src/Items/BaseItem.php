@@ -54,6 +54,8 @@ abstract class BaseItem implements ItemInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -62,5 +64,7 @@ abstract class BaseItem implements ItemInterface
     public function setLabel($label)
     {
         $this->label = $label;
+
+        return $this;
     }
 }
