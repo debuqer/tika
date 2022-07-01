@@ -31,10 +31,10 @@ class Form
     }
 
     /**
-     * @param ItemInterface $item
+     * @return Group
      */
-    public function setItem(ItemInterface $item)
+    public function getContainer()
     {
-        $this->group->append($item);
+        return $this->group;
     }
 }

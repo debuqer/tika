@@ -45,4 +45,20 @@ class Group extends BaseItem
 
         $this->items[] = $newItem;
     }
+
+    /**
+     * @param ItemInterface $item
+     */
+    public function removeItem(ItemInterface $item)
+    {
+        $this->removeItemByName($item->getName());
+    }
+
+    /**
+     * @param $itemName
+     */
+    public function removeItemByName($itemName)
+    {
+        unset($this->items[$itemName]);
+    }
 }
