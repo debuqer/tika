@@ -4,36 +4,48 @@
 namespace Debuqer\Tika\Items;
 
 
-use loophp\collection\Collection;
+use Debuqer\Tika\Exceptions\NotValidItemException;
 
 class Group extends BaseItem
 {
     /**
-     * @var Collection $items
+     * @var array $items
      */
     protected $items;
 
+    public function __construct()
+    {
+        $this->items = [];
+    }
+
+    /**
+     * @return array|mixed
+     * @throws NotValidItemException
+     */
     public function getSchema()
     {
-        return $this->items;
+        $schema = [];
+        foreach ($this->items as $item) {
+            if( $item instanceof ItemInterface) {
+                $schema[$item->getName()] = $item->getSchema();
+            } else {
+                throw new NotValidItemException;
+            }
+        }
+
+        return $schema;
     }
 
     /**
-     * @param mixed ...$items
+     * @param $item
      */
-    public function append(...$items)
+    public function append(ItemInterface $item)
     {
-        $this->items->append($items);
-    }
+        $newItem = clone $item;
 
-    /**
-     * @param ItemInterface $item
-     * @return $this
-     */
-    public function addItem(ItemInterface $item)
-    {
-        $this->append($item);
+        $newItem->setName('item_'.count($this->items));
+        $newItem->setLabel('item_'.count($this->items));
 
-        return $this;
+        $this->items[] = $newItem;
     }
 }

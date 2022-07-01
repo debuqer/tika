@@ -3,15 +3,9 @@ namespace Debuqer\Tika;
 
 use Debuqer\Tika\Items\Group;
 use Debuqer\Tika\Items\ItemInterface;
-use loophp\collection\Collection;
 
 class Form
 {
-    /**
-     * @var Collection $items
-     */
-    protected $items;
-
     /**
      * Origin group containing whole the form
      *
@@ -19,8 +13,19 @@ class Form
      */
     protected $group;
 
+    /**
+     * Form constructor.
+     */
     public function __construct()
     {
+        $this->group = new Group();
+    }
+
+    public function getSchema()
+    {
+        return [
+            'items' => $this->group->getSchema()
+        ];
     }
 
     /**
@@ -28,6 +33,6 @@ class Form
      */
     public function setItem(ItemInterface $item)
     {
-        $this->items->append($item);
+        $this->group->append($item);
     }
 }

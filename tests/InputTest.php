@@ -16,26 +16,6 @@ class InputTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      */
-    public function test_fresh_input_name_is_empty()
-    {
-        $item = new \Debuqer\Tika\Items\InputTypes\Input([]);
-
-        $this->assertEmpty($item->getName());
-    }
-
-    /**
-     * @test
-     */
-    public function test_fresh_input_label_is_empty()
-    {
-        $item = new \Debuqer\Tika\Items\InputTypes\Input([]);
-
-        $this->assertEmpty($item->getLabel());
-    }
-
-    /**
-     * @test
-     */
     public function test_input_name_set_properly()
     {
         $item = new \Debuqer\Tika\Items\InputTypes\Input([]);
