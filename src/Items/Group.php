@@ -59,8 +59,16 @@ class Group extends BaseItem
      */
     public function removeItemByName($itemName)
     {
-        $this->items = array_filter($this->items, function (ItemInterface $item) use ($itemName) {
+        $this->removeItemByCondition(function (ItemInterface $item) use ($itemName) {
             return $item->getName() != $itemName;
         });
+    }
+
+    /**
+     * @param \Closure $callback
+     */
+    public function removeItemByCondition(\Closure $callback)
+    {
+        $this->items = array_filter($this->items, $callback);
     }
 }
