@@ -18,7 +18,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $schema = $form->getSchema();
 
         $this->assertArrayHasKey('body', $schema);
-        $this->assertEquals(5, count($schema['body']['items']));
+        $this->assertEquals(5, count($form->getItemSchema('body.items')));
 
         foreach ($schema['body']['items'] as $itemSchema) {
             $this->assertEquals($itemSchema, $item->getSchema());
@@ -40,14 +40,14 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $form->getBody()->removeItemByName('a');
 
         $schema = $form->getSchema();
-        $this->assertEquals(4, count($schema['body']['items']));
-        $this->assertArrayNotHasKey('a', $schema['body']['items']);
+        $this->assertEquals(4, count($form->getItemSchema('body.items')));
+        $this->assertArrayNotHasKey('a', $form->getItemSchema('body.items'));
 
         $form->getBody()->removeItemByName('b');
 
         $schema = $form->getSchema();
-        $this->assertEquals(3, count($schema['body']['items']));
-        $this->assertArrayNotHasKey('b', $schema['body']);
+        $this->assertEquals(3, count($form->getItemSchema('body.items')));
+        $this->assertArrayNotHasKey('b', $form->getItemSchema('body'));
     }
 
     public function testNotThrowingExceptionForNotExistingItem()
@@ -60,8 +60,8 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $form->getBody()->removeItemByName('b');
 
         $schema = $form->getSchema();
-        $this->assertEquals(1, count($schema['body']['items']));
-        $this->assertArrayNotHasKey('b', $schema['body']['items']);
+        $this->assertEquals(1, count($form->getItemSchema('body.items')));
+        $this->assertArrayNotHasKey('b', $form->getItemSchema('body.items'));
     }
 
     public function testFormSchemaIncludesAllItems()
@@ -79,8 +79,8 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $this->assertIsArray($form->getSchema());
         $this->assertArrayHasKey('body', $form->getSchema());
         foreach ($itemNames as $itemName) {
-            $this->assertArrayHasKey($itemName, $form->getSchema()['body']['items']);
-            $this->assertEquals($item->getSchema(), $form->getSchema()['body']['items'][$itemName]);
+            $this->assertArrayHasKey($itemName, $form->getItemSchema('body.items'));
+            $this->assertEquals($item->getSchema(), $form->getItemSchema('body.items.'.$itemName));
         }
     }
 
@@ -96,11 +96,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $form->getBody()->append($group3->setName('g3'));
 
 
-        $this->assertEquals(3, count($form->getSchema()['body']['items']));
+        $this->assertEquals(3, count($form->getItemSchema('body.items')));
 
-        $this->assertEquals($group1->getSchema(), $form->getSchema()['body']['items']['g1']);
-        $this->assertEquals($group2->getSchema(), $form->getSchema()['body']['items']['g2']);
-        $this->assertEquals($group3->getSchema(), $form->getSchema()['body']['items']['g3']);
+        $this->assertEquals($group1->getSchema(), $form->getItemSchema('body.items.g1'));
+        $this->assertEquals($group2->getSchema(), $form->getItemSchema('body.items.g2'));
+        $this->assertEquals($group3->getSchema(), $form->getItemSchema('body.items.g3'));
     }
 
     public function testNestedGroup()
@@ -121,13 +121,65 @@ class FormTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(2, count($form->getSchema()['body']['items']));
 
-        $this->assertEquals($group1->getSchema(), $form->getSchema()['body']['items']['g1']);
-        $this->assertEquals($group2->getSchema(), $form->getSchema()['body']['items']['g2']);
-
         $group1Schema = $group1->getSchema();
         $group2Schema = $group2->getSchema();
 
-        $this->assertEquals($group1Schema, $form->getSchema()['body']['items']['g1']);
-        $this->assertEquals($group2Schema, $form->getSchema()['body']['items']['g2']);
+        $this->assertEquals($group1Schema, $form->getItemSchema('body.items.g1'));
+        $this->assertEquals($group2Schema, $form->getItemSchema('body.items.g2'));
+    }
+
+    public function testAddItemToNestedGroup()
+    {
+        $form = new \Debuqer\Tika\Form();
+
+        $group = new \Debuqer\Tika\Items\Group();
+        $group->setName('g');
+
+        $item = new Debuqer\Tika\Items\InputTypes\Input([]);
+        $item->setName('i1');
+        $group->append($item);
+
+        $form->getBody()->append($group);
+
+        $this->assertEquals(1, count($form->getItemSchema('body.items.g.items')));
+        $this->assertEquals($item->getSchema(), $form->getItemSchema('body.items.g.items.i1'));
+    }
+
+    public function testGetItemSchema()
+    {
+        $form = new \Debuqer\Tika\Form();
+
+        $group = new \Debuqer\Tika\Items\Group();
+        $group->setName('g');
+
+        $attributes = [
+            ['provider' => \Debuqer\Tika\Items\InputTypes\Attributes\AcceptAttribute::class, 'params' => 'file_extension']
+        ];
+        $item = new Debuqer\Tika\Items\InputTypes\Input($attributes);
+        $item->setName('i1');
+        $group->append($item);
+
+        $form->getBody()->append($group);
+
+        $this->assertEquals($group->getSchema(), $form->getItemSchema('body.items.g'));
+        $this->assertEquals($item->getSchema(), $form->getItemSchema('body.items.g.items.i1'));
+        $this->assertEquals('no_value', $form->getItemSchema('body.items.g.items.i2', 'no_value'));
+    }
+
+    public function testCountMethodOnGetItemSchema()
+    {
+        $form = new \Debuqer\Tika\Form();
+
+        $group = new \Debuqer\Tika\Items\Group();
+        $group->setName('g');
+
+        $item = new Debuqer\Tika\Items\InputTypes\Input([]);
+        $item->setName('i1');
+        $group->append($item);
+
+        $form->getBody()->append($group);
+
+        $this->assertEquals(1, $form->getItemSchema('body.items.count()'));
+        $this->assertEquals(1, $form->getItemSchema('body.items.g.items.count()'));
     }
 }

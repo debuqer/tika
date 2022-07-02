@@ -37,4 +37,32 @@ class Form
     {
         return $this->group;
     }
+
+    /**
+     * @param $itemAddressKey
+     * @param null $default
+     * @return array|mixed
+     */
+    public function getItemSchema($itemAddressKey, $default = null) {
+        $schema = $this->getSchema();
+        if ( $itemAddressKey === '' ) {
+            return $schema;
+        }
+
+        $itemAddress = explode('.', $itemAddressKey);
+
+        for ($depth = 0; $depth < count($itemAddress); $depth++) {
+            if( $itemAddress[$depth] === 'count()') {
+                return count($schema);
+            }
+            else if ( isset($schema[$itemAddress[$depth]]) ) {
+                $schema = $schema[$itemAddress[$depth]];
+            }
+            else {
+                return $default;
+            }
+        }
+
+        return $schema;
+    }
 }
