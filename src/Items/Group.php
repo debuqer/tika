@@ -33,7 +33,12 @@ class Group extends BaseItem
             }
         }
 
-        return $schema;
+        return [
+            'type' => Group::class,
+            'name' => $this->getName(),
+            'label' => $this->getLabel(),
+            'items' => $schema
+        ];
     }
 
     /**

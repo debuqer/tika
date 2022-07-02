@@ -26,14 +26,14 @@ class Form
     public function getSchema()
     {
         return [
-            'items' => $this->group->getSchema()
+            'body' => $this->group->getSchema()
         ];
     }
 
     /**
      * @return Group
      */
-    public function getContainer()
+    public function getBody()
     {
         return $this->group;
     }
