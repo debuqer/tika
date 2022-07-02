@@ -102,4 +102,32 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($group2->getSchema(), $form->getSchema()['body']['items']['g2']);
         $this->assertEquals($group3->getSchema(), $form->getSchema()['body']['items']['g3']);
     }
+
+    public function testNestedGroup()
+    {
+        $form = new \Debuqer\Tika\Form();
+        $group1 = new \Debuqer\Tika\Items\Group();
+        $group11 = new \Debuqer\Tika\Items\Group();
+        $group12 = new \Debuqer\Tika\Items\Group();
+        $group2 = new \Debuqer\Tika\Items\Group();
+        $group21 = new \Debuqer\Tika\Items\Group();
+
+        $group1->append($group11->setName('g1.1'));
+        $group1->append($group12->setName('g1.2'));
+        $group2->append($group21->setName('g2.1'));
+
+        $form->getBody()->append($group1->setName('g1'));
+        $form->getBody()->append($group2->setName('g2'));
+
+        $this->assertEquals(2, count($form->getSchema()['body']['items']));
+
+        $this->assertEquals($group1->getSchema(), $form->getSchema()['body']['items']['g1']);
+        $this->assertEquals($group2->getSchema(), $form->getSchema()['body']['items']['g2']);
+
+        $group1Schema = $group1->getSchema();
+        $group2Schema = $group2->getSchema();
+
+        $this->assertEquals($group1Schema, $form->getSchema()['body']['items']['g1']);
+        $this->assertEquals($group2Schema, $form->getSchema()['body']['items']['g2']);
+    }
 }
