@@ -1,0 +1,29 @@
+{
+    "name": "debuqer/tika",
+    "description": "php flexible form builder",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Debuqer\\Tika\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "debuqer",
+            "email": "bagher2g@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+        "update-snapshots": "./vendor/bin/phpunit --no-coverage -d --update-snapshots",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --debug --coverage-html coverage"
+    },
+    "require": {
+        "loophp/collection": "dev-master"
+    }
+}
