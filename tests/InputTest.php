@@ -41,7 +41,7 @@ class InputTest extends \PHPUnit\Framework\TestCase
     public function test_input_attributes_works_properly()
     {
         $attributes = [
-            ['provider' => \Debuqer\Tika\Items\InputTypes\Attributes\AcceptAttribute::class, 'params' => 'file_extension']
+            ['provider' => \Debuqer\Tika\Items\Attributes\AcceptAttribute::class, 'params' => 'file_extension']
         ];
 
         $item = new \Debuqer\Tika\Items\InputTypes\Input($attributes);

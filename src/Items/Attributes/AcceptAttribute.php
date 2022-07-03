@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Debuqer\Tika\Items\InputTypes\Attributes;
+namespace Debuqer\Tika\Items\Attributes;
 
 
 class AcceptAttribute extends BaseAttribute

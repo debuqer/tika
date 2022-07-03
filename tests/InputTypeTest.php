@@ -22,7 +22,7 @@ class InputTypeTest extends \PHPUnit\Framework\TestCase
     {
         $attributes = [
             [
-                'provider' => \Debuqer\Tika\Items\InputTypes\Attributes\AcceptAttribute::class,
+                'provider' => \Debuqer\Tika\Items\Attributes\AcceptAttribute::class,
                 'params' => 'file_extension'
             ]
         ];

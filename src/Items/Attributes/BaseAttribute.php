@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Debuqer\Tika\Items\InputTypes\Attributes;
+namespace Debuqer\Tika\Items\Attributes;
 
 
 abstract class BaseAttribute implements AttributeInterface
