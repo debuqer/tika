@@ -153,7 +153,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $group->setName('g');
 
         $attributes = [
-            ['provider' => \Debuqer\Tika\Items\InputTypes\Attributes\AcceptAttribute::class, 'params' => 'file_extension']
+            ['provider' => \Debuqer\Tika\Items\Attributes\AcceptAttribute::class, 'params' => 'file_extension']
         ];
         $item = new Debuqer\Tika\Items\InputTypes\Input($attributes);
         $item->setName('i1');

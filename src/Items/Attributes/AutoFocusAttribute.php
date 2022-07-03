@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Debuqer\Tika\Items\InputTypes\Attributes;
+namespace Debuqer\Tika\Items\Attributes;
 
 
-class AcceptAttribute extends BaseAttribute
+class AutoFocusAttribute extends BaseAttribute
 {
     /**
      * @var array
@@ -14,7 +14,7 @@ class AcceptAttribute extends BaseAttribute
     public function getSchema()
     {
         return [
-            'accept' => $this->getParam(0),
+            'auto_focus' => true,
         ];
     }
 }

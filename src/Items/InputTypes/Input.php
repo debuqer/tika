@@ -5,7 +5,7 @@ namespace Debuqer\Tika\Items\InputTypes;
 
 
 use Debuqer\Tika\Items\BaseItem;
-use Debuqer\Tika\Items\InputTypes\Attributes\AttributeInterface;
+use Debuqer\Tika\Items\Attributes\AttributeInterface;
 
 class Input extends BaseItem
 {
