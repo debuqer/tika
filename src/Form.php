@@ -49,6 +49,17 @@ class Form
             return $schema;
         }
 
+        return $this->rollingInTheDeep($schema, $itemAddressKey, $default);
+    }
+
+    /**
+     * @param array $schema
+     * @param $itemAddressKey
+     * @param null $default
+     * @return mixed|null
+     */
+    protected function rollingInTheDeep(array $schema, $itemAddressKey, $default = null)
+    {
         $itemAddress = explode('.', $itemAddressKey);
 
         for ($depth = 0; $depth < count($itemAddress); $depth++) {
@@ -65,4 +76,5 @@ class Form
 
         return $schema;
     }
+
 }
