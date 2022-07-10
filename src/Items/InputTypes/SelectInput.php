@@ -15,7 +15,7 @@ class SelectInput extends Input
 
     protected $options = [];
 
-    public function __construct($options = [], $attributes)
+    public function __construct($attributes, $options = [])
     {
         $this->options = $options;
         parent::__construct(array_merge($this->attributes, $attributes));
