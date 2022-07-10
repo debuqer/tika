@@ -38,6 +38,14 @@ class Input extends BaseItem
     }
 
     /**
+     * @param $attribute
+     */
+    public function setAttribute($attribute)
+    {
+        $this->attributes[] = $attribute;
+    }
+
+    /**
      * @return array
      */
     public function getAttributes()

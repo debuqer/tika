@@ -12,9 +12,4 @@ class TextInput extends Input
     protected $attributes = [
         ['provider' => TypeAttribute::class, 'params' => 'text']
     ];
-
-    public function __construct()
-    {
-        parent::__construct($this->attributes);
-    }
 }
