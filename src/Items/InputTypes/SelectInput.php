@@ -4,10 +4,9 @@
 namespace Debuqer\Tika\Items\InputTypes;
 
 
-use Debuqer\Tika\Items\Attributes\AcceptAttribute;
 use Debuqer\Tika\Items\Attributes\TypeAttribute;
 
-class TextInput extends Input
+class SelectInput extends Input
 {
     protected $attributes = [
         ['provider' => TypeAttribute::class, 'params' => 'text']
