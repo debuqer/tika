@@ -8,8 +8,10 @@ class InputUtility
     ];
 
     /**
+     * @param $type
+     * @param $name
      * @param array $model_config
-     * @return \Debuqer\TikaFormBuilder\Form
+     * @return mixed
      */
     public static function create($type, $name, array $model_config)
     {
