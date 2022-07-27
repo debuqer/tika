@@ -4,13 +4,15 @@
 namespace Debuqer\TikaFormBuilder\Tests;
 
 
+use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+
 class FormInitialTest extends BasicTestClass
 {
     protected $utils_list = ['form'];
 
     public function test_init_form()
     {
-        $form = $this->utils['form']->createForm();
+        $form = FormUtility::createForm();
 
         $this->assertNotNull($form);
     }
@@ -23,8 +25,7 @@ class FormInitialTest extends BasicTestClass
                 'input:lname' => [],
             ]
         ];
-
-        $form = $this->utils['form']->createForm($model_config);
+        $form = FormUtility::createForm($model_config);
 
         $this->assertEquals($form->getModelConfig(), $model_config);
     }
