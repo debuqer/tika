@@ -10,6 +10,24 @@ class FormInitialTest extends BasicTestClass
 
     public function test_init_form()
     {
-        $this->utils['form']->createForm();
+        $form = $this->utils['form']->createForm();
+
+        $this->assertNotNull($form);
+    }
+
+    public function test_load_model()
+    {
+        $model_config = [
+            'instance' => [
+                'person' => [
+                    'fname' => [],
+                    'lname' => [],
+                ]
+            ]
+        ];
+
+        $form = $this->utils['form']->createForm($model_config);
+
+        $this->assertEquals($form->getModelConfig(), $model_config);
     }
 }
