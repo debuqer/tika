@@ -1,0 +1,21 @@
+{
+    "name": "debuqer/tika-form-builder",
+    "description": "Laravel XForm Builder",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Debuqer\\TikaFormBuilder\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "debuqer",
+            "email": "bagher2g@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "livewire/livewire": "dev-master"
+    }
+}
