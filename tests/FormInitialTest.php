@@ -19,10 +19,8 @@ class FormInitialTest extends BasicTestClass
     {
         $model_config = [
             'instance' => [
-                'person' => [
-                    'fname' => [],
-                    'lname' => [],
-                ]
+                'input:fname' => [],
+                'input:lname' => [],
             ]
         ];
 
