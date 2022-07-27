@@ -5,7 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Debuqer\\TikaFormBuilder\\": "src/"
+            "Debuqer\\TikaFormBuilder\\": "src/",
+            "Debuqer\\TikaFormBuilder\\Tests\\": "tests/"
         }
     },
     "authors": [
