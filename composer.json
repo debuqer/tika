@@ -14,9 +14,12 @@
             "email": "bagher2g@gmail.com"
         }
     ],
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "minimum-stability": "dev",
     "require": {
         "livewire/livewire": "dev-master",
-        "phpunit/phpunit": "10.0.x-dev"
+        "phpunit/phpunit": "^9"
     }
 }
