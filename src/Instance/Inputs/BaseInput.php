@@ -4,17 +4,19 @@
 namespace Debuqer\TikaFormBuilder\Instance\Inputs;
 
 
+use Arrayy\Arrayy;
+
 abstract class BaseInput implements InputInterface
 {
     /** @var string */
     protected $name;
-    /** @var array */
+    /** @var Arrayy  */
     protected $modelConfig;
 
     public function __construct($name, $modelConfig = [])
     {
         $this->name = $name;
-        $this->modelConfig = $modelConfig;
+        $this->modelConfig = Arrayy::create($modelConfig);
     }
 
     /**
@@ -26,10 +28,20 @@ abstract class BaseInput implements InputInterface
     }
 
     /**
-     * @return array
+     * @return Arrayy
      */
     public function getModelConfig()
     {
         return $this->modelConfig;
+    }
+
+    /**
+     * @param $propertyName
+     * @param null $fallback
+     * @return array|Arrayy|mixed|null
+     */
+    public function getProperty($propertyName, $fallback = null)
+    {
+        return $this->modelConfig->get($propertyName, $fallback);
     }
 }

@@ -34,6 +34,20 @@ class TextInputTest extends \PHPUnit\Framework\TestCase
         ];
         $input = \Debuqer\TikaFormBuilder\Tests\Utils\InputUtility::create('text', $name, $model);
 
-        $this->assertEquals($model, $input->getModelConfig());
+        $this->assertEquals(Arrayy\create($model), $input->getModelConfig());
+    }
+
+    public function test_can_add_any_property()
+    {
+        $name = 'foo';
+        $model = [
+            'custom_property' => [
+                'custom_inner_property' => 'bar'
+            ]
+        ];
+
+        $input = \Debuqer\TikaFormBuilder\Tests\Utils\InputUtility::create('text', $name, $model);
+
+        $this->assertEquals('bar', $input->getProperty('custom_property.custom_inner_property'));
     }
 }
