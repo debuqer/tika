@@ -14,8 +14,31 @@ class ConfigContainer implements ConfigContainerInterface
         $this->config = Arrayy::create($config);
     }
 
-    public function get($propertyName, $default)
+    public function get($propertyName = null, $default = null)
     {
-        return $this->config->get($propertyName, $default);
+        $value = $this->config->get($propertyName, $default);
+
+        if ( $value instanceof Arrayy) {
+            return new ConfigContainer($value->toArray());
+        } else if ( is_array($value) ) {
+            return new ConfigContainer($value);
+        }
+
+        return $value;
+    }
+
+    public function push($item)
+    {
+        $this->config->push($item);
+    }
+
+    public function toArray()
+    {
+        return $this->config->toArray();
+    }
+
+    public function merge($array)
+    {
+        $this->config = $this->config->mergeAppendNewIndex($array);
     }
 }

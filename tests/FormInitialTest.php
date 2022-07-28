@@ -5,7 +5,7 @@ namespace Debuqer\TikaFormBuilder\Tests;
 
 
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 
 class FormInitialTest extends BasicTestClass
@@ -23,12 +23,28 @@ class FormInitialTest extends BasicTestClass
     {
         $model_config = new ConfigContainer([
             'instance' => [
-                'input:fname' => [],
-                'input:lname' => [],
+                'text:fname' => [],
+                'text:lname' => [],
             ]
         ]);
         $form = FormUtility::createForm($model_config);
 
         $this->assertEquals($form->getModelConfig(), $model_config);
+    }
+
+    public function test_pop_items()
+    {
+        $model_config = new ConfigContainer([
+            'instance' => [
+                'text:fname' => [],
+                'text:lname' => [],
+            ]
+        ]);
+        $form = FormUtility::createForm($model_config);
+
+        $items = $form->getIntance()->getItems();
+
+        $this->assertInstanceOf(TextInput::class, $items->get('text:fname'));
+        $this->assertInstanceOf(TextInput::class, $items->get('text:lname'));
     }
 }

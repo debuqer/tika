@@ -3,5 +3,13 @@ namespace Debuqer\TikaFormBuilder\DataStructure\Contracts;
 
 interface ConfigContainerInterface
 {
-    public function get($propertyName, $default);
+    /**
+     * @param string $propertyName null for all items, dot notation
+     * @param null $default default can be [] or null or etc
+     * @return mixed
+     */
+    public function get($propertyName = '', $default = []);
+    public function push($item);
+    public function merge($array);
+    public function toArray();
 }
