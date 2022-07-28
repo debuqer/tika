@@ -3,6 +3,8 @@ namespace Debuqer\TikaFormBuilder\Instance;
 
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\Exceptions\NotValidItemConfig;
+use Debuqer\TikaFormBuilder\Exceptions\NotValidItemIdKey;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
 
 class Instance
@@ -17,6 +19,14 @@ class Instance
         $items = $instanceConfig->toArray();
         /** @var ConfigContainerInterface $item */
         foreach ($items as $itemId => $itemConfig) {
+            if( !is_array($itemConfig) ) {
+                throw new NotValidItemConfig(sprintf('Item %s config is not not valid', $itemId));
+            }
+
+            if ( $itemId == '' ) {
+                throw new NotValidItemIdKey('ItemId must not be empty');
+            }
+
             $itemIdSplited = explode(':', $itemId);
             $itemType = 'text';
             if ( count($itemIdSplited) == 2 ) {
@@ -28,13 +38,13 @@ class Instance
             } else if( count($itemIdSplited) == 1 ){
                 $itemName = $itemIdSplited[0];
             } else {
-                throw new \NotValidItemIdKey('Item id must be satisfied by type:name or name or :name');
+                throw new NotValidItemIdKey('Item id must be satisfied by type:name or name or :name');
             }
 
             if ( $itemType == 'text' ) {
                 $item = new TextInput($itemName, new ConfigContainer($itemConfig));
             } else {
-                throw new \NotValidItemIdKey(sprintf('Item %s type is not valid', $itemType));
+                throw new NotValidItemIdKey(sprintf('Item %s type is not valid', $itemType));
             }
 
             $this->items->merge([$itemId => $item]);
