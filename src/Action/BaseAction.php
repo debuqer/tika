@@ -15,6 +15,8 @@ abstract class BaseAction implements ActionInterface
     /** @var string  */
     protected $event;
     /** @var ConfigContainerInterface  */
+    protected $conditions;
+    /** @var ConfigContainerInterface  */
     protected $parameters;
 
     public function __construct($name,
@@ -27,5 +29,25 @@ abstract class BaseAction implements ActionInterface
         $this->event = $event;
         $this->conditions = $conditions;
         $this->parameters = $parameters;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    public function getConditions()
+    {
+        return $this->conditions;
+    }
+
+    public function getParameters()
+    {
+        return $this->parameters;
     }
 }
