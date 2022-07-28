@@ -31,7 +31,7 @@ class Form
     /**
      * @param ConfigContainerInterface $instance
      */
-    public function buildInstance(ConfigContainerInterface $instance, ConfigContainerInterface $providers)
+    protected function buildInstance(ConfigContainerInterface $instance, ConfigContainerInterface $providers)
     {
         $providers->merge([
             // default providers
