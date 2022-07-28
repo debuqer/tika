@@ -15,7 +15,10 @@ class Form
     public function __construct(ConfigContainerInterface $modelConfig)
     {
         $this->modelConfig = $modelConfig;
-        $this->buildInstance($modelConfig->get('instance', []));
+        $this->buildInstance(
+            $modelConfig->get('instance', []),
+            $modelConfig->get('providers', [])
+        );
     }
 
     /**
@@ -29,9 +32,9 @@ class Form
     /**
      * @param ConfigContainerInterface $instance
      */
-    public function buildInstance(ConfigContainerInterface $instance)
+    public function buildInstance(ConfigContainerInterface $instance, ConfigContainerInterface $providers)
     {
-        $this->instance = new Instance($instance);
+        $this->instance = new Instance($instance, $providers);
     }
 
     public function getIntance()

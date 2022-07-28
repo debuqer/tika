@@ -7,7 +7,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
     {
         $instance = $this->createInstance([
             'text:a' => [],
-        ]);
+        ], []);
 
         $this->assertNotNull($instance);
     }
@@ -18,7 +18,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
         $this->createInstance([
             'invalid:a' => [],
-        ]);
+        ], []);
     }
 
     public function test_error_on_invalid_item_id()
@@ -27,7 +27,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
         $this->createInstance([
             '' => [],
-        ]);
+        ], []);
     }
 
     public function test_error_on_invalid_item_id_3_section()
@@ -36,14 +36,14 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
         $this->createInstance([
             'text:a:b' => [],
-        ]);
+        ], []);
     }
 
     public function test_create_items()
     {
         $instance = $this->createInstance([
             'text:a' => [],
-        ]);
+        ], []);
 
         $this->assertInstanceOf(
             \Debuqer\TikaFormBuilder\Instance\Inputs\TextInput::class,
@@ -57,13 +57,25 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
         $this->createInstance([
             'text:a' => 'invalid_config_',
-        ]);
+        ], []);
     }
 
-    protected function createInstance($config_array)
+    public function test_pass_custom_provider()
+    {
+        $instance = $this->createInstance([
+            'custom_provider:a' => [],
+        ], [
+            'instance:custom_provider' => \Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomProvider::class
+        ]);
+
+        $this->assertNotNull($instance);
+    }
+
+    protected function createInstance($config_array, $providers_config)
     {
         $config = new \Debuqer\TikaFormBuilder\DataStructure\ConfigContainer($config_array);
+        $providers = new \Debuqer\TikaFormBuilder\DataStructure\ConfigContainer($providers_config);
 
-        return new Debuqer\TikaFormBuilder\Instance\Instance($config);
+        return new Debuqer\TikaFormBuilder\Instance\Instance($config, $providers);
     }
 }

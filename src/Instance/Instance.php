@@ -11,10 +11,15 @@ class Instance
 {
     /** @var array  */
     protected ConfigContainerInterface $items;
+    /** @var ConfigContainerInterface */
+    protected $providers;
 
-    public function __construct(ConfigContainerInterface $instanceConfig)
+    public function __construct(ConfigContainerInterface $instanceConfig,
+                                ConfigContainerInterface $providers
+    )
     {
         $this->items = new ConfigContainer([]);
+        $this->setProviders($providers);
 
         $items = $instanceConfig->toArray();
         /** @var ConfigContainerInterface $item */
@@ -41,8 +46,9 @@ class Instance
                 throw new NotValidItemIdKey('Item id must be satisfied by type:name or name or :name');
             }
 
-            if ( $itemType == 'text' ) {
-                $item = new TextInput($itemName, new ConfigContainer($itemConfig));
+            $itemProvider = $this->providers->get('instance:'.$itemType, null);
+            if ( $itemProvider ) {
+                $item = new $itemProvider($itemName, new ConfigContainer($itemConfig));
             } else {
                 throw new NotValidItemIdKey(sprintf('Item %s type is not valid', $itemType));
             }
@@ -54,5 +60,18 @@ class Instance
     public function getItems()
     {
         return $this->items;
+    }
+
+    protected function setProviders(ConfigContainerInterface $customProviders)
+    {
+        $this->providers = new ConfigContainer([
+            'instance:text' => TextInput::class,
+        ]);
+
+        foreach ($customProviders->toArray() as $customProviderKey => $customProviderClass) {
+            if( strpos($customProviderKey, 'instance:') !== false ) {
+                $this->providers->merge([$customProviderKey => $customProviderClass]);
+            }
+        }
     }
 }
