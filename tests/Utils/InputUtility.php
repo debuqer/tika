@@ -1,6 +1,8 @@
 <?php
 namespace Debuqer\TikaFormBuilder\Tests\Utils;
 
+use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+
 class InputUtility
 {
     protected static $input_types = [
@@ -10,10 +12,10 @@ class InputUtility
     /**
      * @param $type
      * @param $name
-     * @param array $model_config
+     * @param ConfigContainerInterface $model_config
      * @return mixed
      */
-    public static function create($type, $name, array $model_config)
+    public static function create($type, $name, ConfigContainerInterface $model_config)
     {
         $className = static::$input_types[$type];
 
