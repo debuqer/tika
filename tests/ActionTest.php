@@ -31,7 +31,7 @@ class ActionTest extends BasicTestClass
             'set-value',
             'load',
             [],
-            ['field_name' => 'text:fname', 'attribute' => 'value', 'target' => 2]
+            ['field' => 'text:fname', 'attribute' => 'value', 'value' => 2]
         );
         $action->run($form);
 

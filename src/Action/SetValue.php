@@ -10,10 +10,10 @@ class SetValue extends BaseAction
 {
     public function run(Form &$form)
     {
-        $fieldName = $this->getParameters()->get('field_name');
+        $fieldName = $this->getParameters()->get('field');
         $attribute = $this->getParameters()->get('attribute');
 
-        $target = $this->getParameters()->get('target');
+        $target = $this->getParameters()->get('value');
 
         $form->getIntance()->getItems()->get($fieldName)->setProperty($attribute, $target);
     }
