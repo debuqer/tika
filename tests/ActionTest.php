@@ -24,7 +24,7 @@ class ActionTest extends BasicTestClass
         $conditions = new ConfigContainer($conditions);
         $parameters = new ConfigContainer($parameters);
 
-        if ( $event == 'set-value' ) {
+        if ( $action == 'set-value' ) {
             return new SetValue($name, $event, $conditions, $parameters);
         }
     }
