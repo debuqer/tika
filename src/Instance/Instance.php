@@ -3,8 +3,10 @@ namespace Debuqer\TikaFormBuilder\Instance;
 
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\Exceptions\NotValidInputProvider;
 use Debuqer\TikaFormBuilder\Exceptions\NotValidItemConfig;
 use Debuqer\TikaFormBuilder\Exceptions\NotValidItemIdKey;
+use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
 
 class Instance
@@ -48,6 +50,10 @@ class Instance
 
             $itemProvider = $this->providers->get('instance:'.$itemType, null);
             if ( $itemProvider ) {
+                if ( !class_implements($itemProvider, InputInterface::class) ) {
+                    throw new NotValidInputProvider(sprintf('Item %s provider has not implemented InputInterface', $itemType));
+                }
+
                 $item = new $itemProvider($itemName, new ConfigContainer($itemConfig));
             } else {
                 throw new NotValidItemIdKey(sprintf('Item %s type is not valid', $itemType));

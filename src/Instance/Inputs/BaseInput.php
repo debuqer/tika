@@ -4,7 +4,6 @@
 namespace Debuqer\TikaFormBuilder\Instance\Inputs;
 
 
-use Arrayy\Arrayy;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 
 abstract class BaseInput implements InputInterface
