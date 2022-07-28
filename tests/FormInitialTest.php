@@ -42,7 +42,7 @@ class FormInitialTest extends BasicTestClass
         ]);
         $form = FormUtility::createForm($model_config);
 
-        $items = $form->getIntance()->getItems();
+        $items = $form->getInstance()->getItems();
 
         $this->assertInstanceOf(TextInput::class, $items->get('text:fname'));
         $this->assertInstanceOf(TextInput::class, $items->get('text:lname'));

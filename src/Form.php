@@ -40,7 +40,7 @@ class Form
         $this->instance = new Instance($instance, $providers);
     }
 
-    public function getIntance()
+    public function getInstance()
     {
         return $this->instance;
     }

@@ -15,6 +15,6 @@ class SetValue extends BaseAction
 
         $target = $this->getParameters()->get('value');
 
-        $form->getIntance()->getItems()->get($fieldName)->setProperty($attribute, $target);
+        $form->getInstance()->getItems()->get($fieldName)->setProperty($attribute, $target);
     }
 }
