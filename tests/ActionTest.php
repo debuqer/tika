@@ -36,7 +36,7 @@ class ActionTest extends BasicTestClass
         $action->run($form);
 
         $this->assertEquals('2',
-            $form->getInstance()->getItems()->get('text:fname')->getProperty('value')
+            $form->getInstance()->getItems()->get('text:fname')->get('value')
         );
     }
 

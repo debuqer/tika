@@ -44,4 +44,22 @@ class Form
     {
         return $this->instance;
     }
+
+    public function get($key, $fallback = null)
+    {
+        $address = explode('.', $key);
+
+        $currentItem = $this;
+        for ($pointer = 0; $pointer < sizeof($address); $pointer++) {
+            $block = $address[$pointer];
+
+            if ( $block == 'instance' ) {
+                $currentItem = $currentItem->getInstance()->getItems();
+            } else {
+                $currentItem = $currentItem->get($block, $fallback);
+            }
+        }
+
+        return $currentItem;
+    }
 }

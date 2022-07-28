@@ -47,4 +47,20 @@ class FormInitialTest extends BasicTestClass
         $this->assertInstanceOf(TextInput::class, $items->get('text:fname'));
         $this->assertInstanceOf(TextInput::class, $items->get('text:lname'));
     }
+
+    public function test_get()
+    {
+        $model_config = new ConfigContainer([
+            'instance' => [
+                'text:fname' => [
+                    'value' => 'john',
+                ],
+            ]
+        ]);
+        $form = FormUtility::createForm($model_config);
+
+        $this->assertEquals('john', $form->get('instance.text:fname.value'));
+        $this->assertEquals('def', $form->get('instance.text:fname.visible', 'def'));
+        $this->assertNull($form->get('instance.text:fname.not_defined'));
+    }
 }
