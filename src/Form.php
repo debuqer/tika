@@ -1,7 +1,6 @@
 <?php
 namespace Debuqer\TikaFormBuilder;
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Instance\Instance;
 
@@ -34,6 +33,10 @@ class Form
      */
     public function buildInstance(ConfigContainerInterface $instance, ConfigContainerInterface $providers)
     {
+        $providers->merge([
+            // default providers
+        ]);
+
         $this->instance = new Instance($instance, $providers);
     }
 

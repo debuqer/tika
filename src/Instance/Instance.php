@@ -62,13 +62,13 @@ class Instance
         return $this->items;
     }
 
-    protected function setProviders(ConfigContainerInterface $customProviders)
+    protected function setProviders(ConfigContainerInterface $providers)
     {
         $this->providers = new ConfigContainer([
             'instance:text' => TextInput::class,
         ]);
 
-        foreach ($customProviders->toArray() as $customProviderKey => $customProviderClass) {
+        foreach ($providers->toArray() as $customProviderKey => $customProviderClass) {
             if( strpos($customProviderKey, 'instance:') !== false ) {
                 $this->providers->merge([$customProviderKey => $customProviderClass]);
             }
