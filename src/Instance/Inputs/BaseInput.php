@@ -45,4 +45,9 @@ abstract class BaseInput implements InputInterface
     {
         return $this->modelConfig->get($propertyName, $fallback);
     }
+
+    public function setProperty($propertyName, $value)
+    {
+        $this->modelConfig->set($propertyName, $value);
+    }
 }

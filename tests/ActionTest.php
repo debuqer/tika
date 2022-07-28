@@ -5,6 +5,7 @@ namespace Debuqer\TikaFormBuilder\Tests;
 
 use Debuqer\TikaFormBuilder\Action\SetValue;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
+use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 
 class ActionTest extends BasicTestClass
 {
@@ -14,9 +15,29 @@ class ActionTest extends BasicTestClass
 
         $this->assertNotNull($action);
         $this->assertEquals('action', $action->getName());
-        $this->assertEquals('set-value', $action->getEvent());
+        $this->assertEquals('load', $action->getEvent());
         $this->assertInstanceOf(SetValue::class, $action);
-        $this->assertEquals([], $action->getConditions());
+    }
+
+    public function test_set_value_action()
+    {
+        $configContainer = new ConfigContainer([
+            'instance' => [
+                'text:fname' => []
+            ]
+        ]);
+        $form = FormUtility::createForm($configContainer);
+        $action = $this->createAction('action',
+            'set-value',
+            'load',
+            [],
+            ['field_name' => 'text:fname', 'attribute' => 'value', 'target' => 2]
+        );
+        $action->run($form);
+
+        $this->assertEquals('2',
+            $form->getIntance()->getItems()->get('text:fname')->getProperty('value')
+        );
     }
 
     protected function createAction($name, $action, $event, $conditions, $parameters)

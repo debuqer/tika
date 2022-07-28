@@ -9,6 +9,7 @@ interface ConfigContainerInterface
      * @return mixed
      */
     public function get($propertyName = '', $default = []);
+    public function set($propertyName, $value);
     public function push($item);
     public function merge($array);
     public function toArray();
