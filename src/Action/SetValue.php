@@ -13,8 +13,11 @@ class SetValue extends BaseAction
         $fieldName = $this->getParameters()->get('field');
         $attribute = $this->getParameters()->get('attribute');
 
-        $target = $this->getParameters()->get('value');
+        $expr = $this->getParameters()->get('value');
+        $value = $this->expressionLanguage->evaluate($expr, [
+            'form' => $form,
+        ]);
 
-        $form->getInstance()->getItems()->get($fieldName)->setProperty($attribute, $target);
+        $form->getInstance()->getItems()->get($fieldName)->setProperty($attribute, $value);
     }
 }

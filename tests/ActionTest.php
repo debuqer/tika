@@ -23,7 +23,8 @@ class ActionTest extends BasicTestClass
     {
         $configContainer = new ConfigContainer([
             'instance' => [
-                'text:fname' => []
+                'text:fname' => [],
+                'text:lname' => [],
             ]
         ]);
         $form = FormUtility::createForm($configContainer);
@@ -34,9 +35,20 @@ class ActionTest extends BasicTestClass
             ['field' => 'text:fname', 'attribute' => 'value', 'value' => 2]
         );
         $action->run($form);
-
         $this->assertEquals('2',
             $form->getInstance()->getItems()->get('text:fname')->get('value')
+        );
+
+        $action = $this->createAction('action',
+            'set-value',
+            'load',
+            [],
+            ['field' => 'text:lname', 'attribute' => 'value',
+                'value' => "form.get('instance.text:fname.value') * 3"]
+        );
+        $action->run($form);
+        $this->assertEquals('6',
+            $form->getInstance()->getItems()->get('text:lname')->get('value')
         );
     }
 
