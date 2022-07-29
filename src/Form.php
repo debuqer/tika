@@ -2,17 +2,29 @@
 namespace Debuqer\TikaFormBuilder;
 
 use Debuqer\TikaFormBuilder\Action\ActionManager;
+use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\Event\BaseEvent;
+use Debuqer\TikaFormBuilder\Event\FormLoadEvent;
 use Debuqer\TikaFormBuilder\Instance\Instance;
+use SplSubject;
 
-class Form
+class Form implements \SplObserver
 {
-    /** @var ConfigContainerInterface  */
+    /** @var ConfigContainerInterface */
     protected $modelConfig;
+
     /** @var Instance */
-    protected $instance;
+    protected Instance $instance;
+
     /** @var ActionManager */
-    protected $actions;
+    protected ActionManager $actions;
+
+    /** @var ConfigContainerInterface */
+    protected ConfigContainerInterface $meta;
+
+    /** @var  array */
+    protected array $observers;
 
     public function __construct(ConfigContainerInterface $modelConfig)
     {
@@ -26,6 +38,8 @@ class Form
             $modelConfig->get('actions', []),
             $modelConfig->get('providers', [])
         );
+
+        $this->meta = $modelConfig->get('meta', []);
     }
 
     /**
@@ -73,6 +87,14 @@ class Form
         return $this->actions;
     }
 
+    /**
+     * @return ConfigContainerInterface
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
     public function get($key, $fallback = null)
     {
         $address = explode('.', $key);
@@ -86,6 +108,8 @@ class Form
                     $currentItem = $currentItem->getInstance()->getItems();
                 } if ( $block == 'actions' ) {
                     $currentItem = $currentItem->getActions()->getItems();
+                } if ( $block == 'meta' ) {
+                    $currentItem = $currentItem->getMeta();
                 }
             } else {
                 $currentItem = $currentItem->get($block, $fallback);
@@ -93,5 +117,25 @@ class Form
         }
 
         return $currentItem;
+    }
+
+    public function trigger(BaseEvent $event)
+    {
+        $event->attach($this);
+        $event->notify();
+        $event->detach($this);
+    }
+
+    public function update(SplSubject $event)
+    {
+        $actions = $this->get('actions')->toArray();
+        /** @var ActionInterface $action */
+        foreach ($actions as $action) {
+            if ( $action->getEvent() === $event->getName() ) {
+                if ( $action->isRunnable($this) ) {
+                    $action->run($this);
+                }
+            }
+        }
     }
 }

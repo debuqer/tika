@@ -7,6 +7,7 @@ namespace Debuqer\TikaFormBuilder\Action\Types;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ExpressionEvaluatorInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ExpressionEvaluator;
+use Debuqer\TikaFormBuilder\Form;
 
 abstract class BaseAction implements ActionInterface
 {
@@ -34,7 +35,7 @@ abstract class BaseAction implements ActionInterface
     {
         $this->name = $name;
         $this->event = $config->get('event');
-        $this->conditions = $config->get('conditions', []);
+        $this->conditions = $config->get('conditions', 'true');
         $this->parameters = $config->get();
 
         $this->expressionLanguage = new ExpressionEvaluator();
@@ -70,5 +71,12 @@ abstract class BaseAction implements ActionInterface
     public function getParameters()
     {
         return $this->parameters;
+    }
+
+    public function isRunnable(Form &$form)
+    {
+        return $this->expressionLanguage->evaluate($this->conditions, [
+            'form' => $form
+        ]);
     }
 }

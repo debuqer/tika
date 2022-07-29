@@ -11,6 +11,6 @@ class MyCustomAction extends \Debuqer\TikaFormBuilder\Action\Types\BaseAction
 
     public function run(Form &$form)
     {
-
+        $form->get('meta')->set('custom-action-executed', true);
     }
 }

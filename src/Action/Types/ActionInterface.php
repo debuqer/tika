@@ -15,4 +15,27 @@ interface ActionInterface
                                 ConfigContainerInterface $config
     );
     public function run(Form &$form);
+
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @return string
+     */
+    public function getEvent();
+
+    /**
+     * @return ConfigContainerInterface
+     */
+    public function getConditions();
+
+    /**
+     * @return ConfigContainerInterface
+     */
+    public function getParameters();
+
+    public function isRunnable(Form &$form);
 }
