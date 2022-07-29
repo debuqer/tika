@@ -59,10 +59,8 @@ class FormInitialTest extends BasicTestClass
                 ],
             ],
             'actions' => [
-                'set-value:action-name' => [
+                'my-custom:action-name' => [
                     'event' => 'load',
-                    'field' => 'instance.text:fname',
-                    'value' => '2'
                 ]
             ]
         ]);
@@ -71,7 +69,7 @@ class FormInitialTest extends BasicTestClass
         $this->assertEquals('john', $form->get('instance.text:fname.value'));
         $this->assertEquals('def', $form->get('instance.text:fname.visible', 'def'));
         $this->assertInstanceOf(InputInterface::class, $form->get('instance.text:fname'));
-        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.set-value:action-name'));
+        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom:action-name'));
         $this->assertNull($form->get('instance.text:fname.not_defined'));
     }
 
@@ -83,16 +81,13 @@ class FormInitialTest extends BasicTestClass
                 'text:lname' => [],
             ],
             'actions' => [
-                'set-value:on-form-load' => [
+                'my-custom:on-form-load' => [
                     'event' => 'form.load',
-                    'conditions' => '',
-                    'field' => 'instance.text:lname.value',
-                    'value' => "form.get('instance.text:fname.value') * 3"
                 ],
             ],
         ]);
 
         $form = FormUtility::createForm($configContainer);
-        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.set-value:on-form-load'));
+        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom:on-form-load'));
     }
 }
