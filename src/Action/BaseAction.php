@@ -5,6 +5,8 @@ namespace Debuqer\TikaFormBuilder\Action;
 
 
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\DataStructure\Contracts\ExpressionEvaluatorInterface;
+use Debuqer\TikaFormBuilder\DataStructure\ExpressionEvaluator;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 abstract class BaseAction implements ActionInterface
@@ -19,7 +21,7 @@ abstract class BaseAction implements ActionInterface
     protected $conditions;
     /** @var ConfigContainerInterface  */
     protected $parameters;
-    /** @var ExpressionLanguage */
+    /** @var ExpressionEvaluatorInterface */
     protected $expressionLanguage;
 
     /**
@@ -40,7 +42,7 @@ abstract class BaseAction implements ActionInterface
         $this->conditions = $conditions;
         $this->parameters = $parameters;
 
-        $this->expressionLanguage = new ExpressionLanguage();
+        $this->expressionLanguage = new ExpressionEvaluator();
     }
 
     /**
