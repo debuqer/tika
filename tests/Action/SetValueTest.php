@@ -5,6 +5,7 @@ namespace Debuqer\TikaFormBuilder\Tests\Action;
 
 
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
+use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
 use Debuqer\TikaFormBuilder\Tests\Utils\ActionUtility;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 use PHPUnit\Framework\TestCase;
@@ -37,5 +38,23 @@ class SetValueTest extends TestCase
         );
         $action->run($form);
         $this->assertEquals('6', $form->get('instance.text:lname.value'));
+    }
+
+    public function test_invalid_parameters_fails()
+    {
+        $configContainer = new ConfigContainer([
+            'instance' => [
+                'text:fname' => [],
+                'text:lname' => [],
+            ]
+        ]);
+        $form = FormUtility::createForm($configContainer);
+
+        $this->expectException(InvalidActionConfiguration::class);
+        $action = ActionUtility::create('action', 'set-value', 'load', [], [
+
+        ]);
+
+        $action->run($form);
     }
 }
