@@ -21,8 +21,7 @@ class SetValueTest extends TestCase
             ]
         ]);
         $form = FormUtility::createForm($configContainer);
-        $action = ActionUtility::create('action',
-            'set-value',
+        $action = ActionUtility::create('set-value:action',
             [
                 'event' => 'form.load',
                 'field' => 'instance.text:fname.value',
@@ -32,8 +31,7 @@ class SetValueTest extends TestCase
         $action->run($form);
         $this->assertEquals('2', $form->get('instance.text:fname.value'));
 
-        $action = ActionUtility::create('action',
-            'set-value',
+        $action = ActionUtility::create('set-value:action',
             [
                 'event' => 'form.load',
                 'field' => 'instance.text:lname.value',
@@ -56,7 +54,7 @@ class SetValueTest extends TestCase
         $form = FormUtility::createForm($configContainer);
 
         $this->expectException(InvalidActionConfiguration::class);
-        $action = ActionUtility::create('action', 'set-value', [
+        $action = ActionUtility::create('set-value:action', [
             'event' => 'form.load',
         ]);
 

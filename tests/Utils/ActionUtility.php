@@ -17,10 +17,13 @@ class ActionUtility
      * @param $config
      * @return mixed
      */
-    public static function create($name, $type, $config)
+    public static function create($actionId, $config)
     {
-        $className = static::$action_types[$type];
+        $actionType = explode(':', $actionId)[0];
+        $actionName = explode(':', $actionId)[1];
 
-        return new $className($name, new ConfigContainer($config));
+        $className = static::$action_types[$actionType];
+
+        return new $className($actionName, new ConfigContainer($config));
     }
 }

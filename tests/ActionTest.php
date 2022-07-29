@@ -9,7 +9,7 @@ class ActionTest extends BasicTestClass
 {
     public function test_action_load()
     {
-        $action = ActionUtility::create('action', 'set-value', [
+        $action = ActionUtility::create('set-value:action', [
             'event' => 'form.load',
             'field' => 'field_name',
         ]);
