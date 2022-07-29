@@ -15,7 +15,7 @@ class FormUtility
     {
         $model_config->merge([
             'providers' => [
-                'input:my-custom' => MyCutsomProvider::class,
+                'instance:my-custom-instance' => MyCutsomProvider::class,
                 'actions:my-custom' => MyCustomAction::class,
             ]
         ]);

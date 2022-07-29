@@ -8,6 +8,7 @@ use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
+use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomProvider;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 
 class FormInitialTest extends BasicTestClass
@@ -25,8 +26,8 @@ class FormInitialTest extends BasicTestClass
     {
         $model_config = new ConfigContainer([
             'instance' => [
-                'text:fname' => [],
-                'text:lname' => [],
+                'my-custom-instance:fname' => [],
+                'my-custom-instance:lname' => [],
             ]
         ]);
         $form = FormUtility::createForm($model_config);
@@ -38,23 +39,23 @@ class FormInitialTest extends BasicTestClass
     {
         $model_config = new ConfigContainer([
             'instance' => [
-                'text:fname' => [],
-                'text:lname' => [],
+                'my-custom-instance:fname' => [],
+                'my-custom-instance:lname' => [],
             ]
         ]);
         $form = FormUtility::createForm($model_config);
 
         $items = $form->getInstance()->getItems();
 
-        $this->assertInstanceOf(TextInput::class, $items->get('text:fname'));
-        $this->assertInstanceOf(TextInput::class, $items->get('text:lname'));
+        $this->assertInstanceOf(MyCutsomProvider::class, $items->get('my-custom-instance:fname'));
+        $this->assertInstanceOf(MyCutsomProvider::class, $items->get('my-custom-instance:lname'));
     }
 
     public function test_get()
     {
         $model_config = new ConfigContainer([
             'instance' => [
-                'text:fname' => [
+                'my-custom-instance:fname' => [
                     'value' => 'john',
                 ],
             ],
@@ -66,19 +67,19 @@ class FormInitialTest extends BasicTestClass
         ]);
         $form = FormUtility::createForm($model_config);
 
-        $this->assertEquals('john', $form->get('instance.text:fname.value'));
-        $this->assertEquals('def', $form->get('instance.text:fname.visible', 'def'));
-        $this->assertInstanceOf(InputInterface::class, $form->get('instance.text:fname'));
+        $this->assertEquals('john', $form->get('instance.my-custom-instance:fname.value'));
+        $this->assertEquals('def', $form->get('instance.my-custom-instance:fname.visible', 'def'));
+        $this->assertInstanceOf(InputInterface::class, $form->get('instance.my-custom-instance:fname'));
         $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom:action-name'));
-        $this->assertNull($form->get('instance.text:fname.not_defined'));
+        $this->assertNull($form->get('instance.my-custom-instance:fname.not_defined'));
     }
 
     public function test_init_action()
     {
         $configContainer = new ConfigContainer([
             'instance' => [
-                'text:fname' => [],
-                'text:lname' => [],
+                'my-custom-instance:fname' => [],
+                'my-custom-instance:lname' => [],
             ],
             'actions' => [
                 'my-custom:on-form-load' => [

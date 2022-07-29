@@ -1,9 +1,9 @@
 <?php
 namespace Debuqer\TikaFormBuilder\Tests\TestClasses;
 
-use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
+use Debuqer\TikaFormBuilder\Instance\Inputs\BaseInput;
 
-class MyCutsomProvider implements InputInterface
+class MyCutsomProvider extends BaseInput
 {
     public function getName()
     {

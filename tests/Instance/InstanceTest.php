@@ -6,7 +6,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
     public function test_can_load_config()
     {
         $instance = $this->createInstance([
-            'text:a' => [],
+            'my-custom-instance:a' => [],
         ], []);
 
         $this->assertNotNull($instance);
@@ -35,19 +35,19 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey::class);
 
         $this->createInstance([
-            'text:a:b' => [],
+            'my-custom-instance:a:b' => [],
         ], []);
     }
 
     public function test_create_items()
     {
         $instance = $this->createInstance([
-            'text:a' => [],
+            'my-custom-instance:a' => [],
         ], []);
 
         $this->assertInstanceOf(
-            \Debuqer\TikaFormBuilder\Instance\Inputs\TextInput::class,
-            $instance->getItems()->get('text:a')
+            \Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomProvider::class,
+            $instance->getItems()->get('my-custom-instance:a')
         );
     }
 
@@ -56,7 +56,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemConfig::class);
 
         $this->createInstance([
-            'text:a' => 'invalid_config_',
+            'my-custom-instance:a' => 'invalid_config_',
         ], []);
     }
 
@@ -75,6 +75,10 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
     {
         $config = new \Debuqer\TikaFormBuilder\DataStructure\ConfigContainer($config_array);
         $providers = new \Debuqer\TikaFormBuilder\DataStructure\ConfigContainer($providers_config);
+
+        $providers->merge([
+            'instance:my-custom-instance' => \Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomProvider::class,
+        ]);
 
         return new Debuqer\TikaFormBuilder\Instance\Instance($config, $providers);
     }
