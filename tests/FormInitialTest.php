@@ -60,7 +60,7 @@ class FormInitialTest extends BasicTestClass
                 ],
             ],
             'actions' => [
-                'my-custom:action-name' => [
+                'my-custom-action:action-name' => [
                     'event' => 'load',
                 ]
             ]
@@ -70,7 +70,7 @@ class FormInitialTest extends BasicTestClass
         $this->assertEquals('john', $form->get('instance.my-custom-instance:fname.value'));
         $this->assertEquals('def', $form->get('instance.my-custom-instance:fname.visible', 'def'));
         $this->assertInstanceOf(InputInterface::class, $form->get('instance.my-custom-instance:fname'));
-        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom:action-name'));
+        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom-action:action-name'));
         $this->assertNull($form->get('instance.my-custom-instance:fname.not_defined'));
     }
 
@@ -82,13 +82,13 @@ class FormInitialTest extends BasicTestClass
                 'my-custom-instance:lname' => [],
             ],
             'actions' => [
-                'my-custom:on-form-load' => [
+                'my-custom-action:on-form-load' => [
                     'event' => 'form.load',
                 ],
             ],
         ]);
 
         $form = FormUtility::createForm($configContainer);
-        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom:on-form-load'));
+        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom-action:on-form-load'));
     }
 }

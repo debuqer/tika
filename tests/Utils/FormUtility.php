@@ -16,7 +16,7 @@ class FormUtility
         $model_config->merge([
             'providers' => [
                 'instance:my-custom-instance' => MyCutsomInstance::class,
-                'actions:my-custom' => MyCustomAction::class,
+                'actions:my-custom-action' => MyCustomAction::class,
             ]
         ]);
         return new \Debuqer\TikaFormBuilder\Form($model_config);

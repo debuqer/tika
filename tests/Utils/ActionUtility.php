@@ -9,7 +9,7 @@ use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomAction;
 class ActionUtility
 {
     protected static $action_types = [
-        'my-custom' => MyCustomAction::class,
+        'my-custom-action' => MyCustomAction::class,
         'set-value' => SetValue::class
     ];
 
