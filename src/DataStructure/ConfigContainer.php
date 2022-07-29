@@ -32,11 +32,6 @@ class ConfigContainer implements ConfigContainerInterface
         $this->config->set($propertyName, $value);
     }
 
-    public function push($item)
-    {
-        $this->config->push($item);
-    }
-
     public function toArray()
     {
         return $this->config->toArray();
