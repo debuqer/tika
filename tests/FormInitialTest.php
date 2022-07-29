@@ -6,6 +6,7 @@ namespace Debuqer\TikaFormBuilder\Tests;
 
 use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
+use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 
@@ -56,12 +57,21 @@ class FormInitialTest extends BasicTestClass
                 'text:fname' => [
                     'value' => 'john',
                 ],
+            ],
+            'actions' => [
+                'set-value:action-name' => [
+                    'event' => 'load',
+                    'field' => 'instance.text:fname',
+                    'value' => '2'
+                ]
             ]
         ]);
         $form = FormUtility::createForm($model_config);
 
         $this->assertEquals('john', $form->get('instance.text:fname.value'));
         $this->assertEquals('def', $form->get('instance.text:fname.visible', 'def'));
+        $this->assertInstanceOf(InputInterface::class, $form->get('instance.text:fname'));
+        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.set-value:action-name'));
         $this->assertNull($form->get('instance.text:fname.not_defined'));
     }
 
