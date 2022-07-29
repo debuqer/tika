@@ -27,20 +27,16 @@ abstract class BaseAction implements ActionInterface
     /**
      * BaseAction constructor.
      * @param $name
-     * @param $event
-     * @param ConfigContainerInterface $conditions
-     * @param ConfigContainerInterface $parameters
+     * @param ConfigContainerInterface $config
      */
     public function __construct($name,
-                                $event,
-                                ConfigContainerInterface $conditions,
-                                ConfigContainerInterface $parameters
+                                ConfigContainerInterface $config
     )
     {
         $this->name = $name;
-        $this->event = $event;
-        $this->conditions = $conditions;
-        $this->parameters = $parameters;
+        $this->event = $config->get('event');
+        $this->conditions = $config->get('conditions', []);
+        $this->parameters = $config->get();
 
         $this->expressionLanguage = new ExpressionEvaluator();
     }

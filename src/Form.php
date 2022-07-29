@@ -1,6 +1,7 @@
 <?php
 namespace Debuqer\TikaFormBuilder;
 
+use Debuqer\TikaFormBuilder\Action\ActionManager;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Instance\Instance;
 
@@ -10,12 +11,19 @@ class Form
     protected $modelConfig;
     /** @var Instance */
     protected $instance;
+    /** @var ActionManager */
+    protected $actions;
 
     public function __construct(ConfigContainerInterface $modelConfig)
     {
         $this->modelConfig = $modelConfig;
         $this->buildInstance(
             $modelConfig->get('instance', []),
+            $modelConfig->get('providers', [])
+        );
+
+        $this->buildActions(
+            $modelConfig->get('actions', []),
             $modelConfig->get('providers', [])
         );
     }
@@ -40,9 +48,29 @@ class Form
         $this->instance = new Instance($instance, $providers);
     }
 
+    protected function buildActions(ConfigContainerInterface $actions, ConfigContainerInterface $providers)
+    {
+        $providers->merge([
+            // default providers
+        ]);
+
+        $this->actions = new ActionManager($actions, $providers);
+    }
+
+    /**
+     * @return Instance
+     */
     public function getInstance()
     {
         return $this->instance;
+    }
+
+    /**
+     * @return ActionManager
+     */
+    public function getActions()
+    {
+        return $this->actions;
     }
 
     public function get($key, $fallback = null)
@@ -53,8 +81,12 @@ class Form
         for ($pointer = 0; $pointer < sizeof($address); $pointer++) {
             $block = $address[$pointer];
 
-            if ( $block == 'instance' ) {
-                $currentItem = $currentItem->getInstance()->getItems();
+            if( $pointer == 0 ) {
+                if ( $block == 'instance' ) {
+                    $currentItem = $currentItem->getInstance()->getItems();
+                } if ( $block == 'actions' ) {
+                    $currentItem = $currentItem->getActions()->getItems();
+                }
             } else {
                 $currentItem = $currentItem->get($block, $fallback);
             }

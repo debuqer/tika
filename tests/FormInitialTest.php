@@ -4,6 +4,7 @@
 namespace Debuqer\TikaFormBuilder\Tests;
 
 
+use Debuqer\TikaFormBuilder\Action\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
@@ -62,5 +63,26 @@ class FormInitialTest extends BasicTestClass
         $this->assertEquals('john', $form->get('instance.text:fname.value'));
         $this->assertEquals('def', $form->get('instance.text:fname.visible', 'def'));
         $this->assertNull($form->get('instance.text:fname.not_defined'));
+    }
+
+    public function test_init_action()
+    {
+        $configContainer = new ConfigContainer([
+            'instance' => [
+                'text:fname' => [],
+                'text:lname' => [],
+            ],
+            'actions' => [
+                'set-value:on-form-load' => [
+                    'event' => 'form.load',
+                    'conditions' => '',
+                    'field' => 'instance.text:lname.value',
+                    'value' => "form.get('instance.text:fname.value') * 3"
+                ],
+            ],
+        ]);
+
+        $form = FormUtility::createForm($configContainer);
+        $this->assertInstanceOf(ActionInterface::class, $form->get('actions.set-value:on-form-load'));
     }
 }

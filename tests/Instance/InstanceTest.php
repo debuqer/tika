@@ -14,7 +14,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     public function test_error_on_invalid_type()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\NotValidItemIdKey::class);
+        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey::class);
 
         $this->createInstance([
             'invalid:a' => [],
@@ -23,7 +23,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     public function test_error_on_invalid_item_id()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\NotValidItemIdKey::class);
+        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey::class);
 
         $this->createInstance([
             '' => [],
@@ -32,7 +32,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     public function test_error_on_invalid_item_id_3_section()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\NotValidItemIdKey::class);
+        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey::class);
 
         $this->createInstance([
             'text:a:b' => [],
@@ -53,7 +53,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     public function test_error_on_invalid_config()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\NotValidItemConfig::class);
+        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemConfig::class);
 
         $this->createInstance([
             'text:a' => 'invalid_config_',

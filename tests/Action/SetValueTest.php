@@ -23,18 +23,22 @@ class SetValueTest extends TestCase
         $form = FormUtility::createForm($configContainer);
         $action = ActionUtility::create('action',
             'set-value',
-            'load',
-            [],
-            ['field' => 'instance.text:fname.value', 'value' => 2]
+            [
+                'event' => 'form.load',
+                'field' => 'instance.text:fname.value',
+                'value' => 2
+            ]
         );
         $action->run($form);
         $this->assertEquals('2', $form->get('instance.text:fname.value'));
 
         $action = ActionUtility::create('action',
             'set-value',
-            'load',
-            [],
-            ['field' => 'instance.text:lname.value', 'value' => "form.get('instance.text:fname.value') * 3"]
+            [
+                'event' => 'form.load',
+                'field' => 'instance.text:lname.value',
+                'value' => "form.get('instance.text:fname.value') * 3"
+            ]
         );
         $action->run($form);
         $this->assertEquals('6', $form->get('instance.text:lname.value'));
@@ -42,6 +46,7 @@ class SetValueTest extends TestCase
 
     public function test_invalid_parameters_fails()
     {
+        $this->expectException(InvalidActionConfiguration::class);
         $configContainer = new ConfigContainer([
             'instance' => [
                 'text:fname' => [],
@@ -51,8 +56,8 @@ class SetValueTest extends TestCase
         $form = FormUtility::createForm($configContainer);
 
         $this->expectException(InvalidActionConfiguration::class);
-        $action = ActionUtility::create('action', 'set-value', 'load', [], [
-
+        $action = ActionUtility::create('action', 'set-value', [
+            'event' => 'form.load',
         ]);
 
         $action->run($form);

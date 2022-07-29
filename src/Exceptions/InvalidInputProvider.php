@@ -4,7 +4,7 @@
 namespace Debuqer\TikaFormBuilder\Exceptions;
 
 
-class NotValidInputProvider extends \Exception
+class InvalidInputProvider extends \Exception
 {
 
 }

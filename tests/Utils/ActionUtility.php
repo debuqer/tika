@@ -3,6 +3,7 @@ namespace Debuqer\TikaFormBuilder\Tests\Utils;
 
 use Debuqer\TikaFormBuilder\Action\SetValue;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
+use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 
 class ActionUtility
 {
@@ -12,18 +13,14 @@ class ActionUtility
 
     /**
      * @param $name
-     * @param $action
-     * @param $event
-     * @param $conditions
-     * @param $parameters
+     * @param $type
+     * @param $config
      * @return mixed
      */
-    public static function create($name, $action, $event, $conditions, $parameters)
+    public static function create($name, $type, $config)
     {
-        $conditions = new ConfigContainer($conditions);
-        $parameters = new ConfigContainer($parameters);
-        $className = static::$action_types[$action];
+        $className = static::$action_types[$type];
 
-        return new $className($name, $event, $conditions, $parameters);
+        return new $className($name, new ConfigContainer($config));
     }
 }
