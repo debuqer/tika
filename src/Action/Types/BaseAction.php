@@ -7,6 +7,7 @@ namespace Debuqer\TikaFormBuilder\Action\Types;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ExpressionEvaluatorInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ExpressionEvaluator;
+use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
 use Debuqer\TikaFormBuilder\Form;
 
 abstract class BaseAction implements ActionInterface
@@ -34,7 +35,11 @@ abstract class BaseAction implements ActionInterface
     )
     {
         $this->name = $name;
-        $this->event = $config->get('event');
+        $this->event = $config->get('event', null);
+        if( !$this->event ) {
+            throw new InvalidActionConfiguration(sprintf('Action %s must have valid event', $name));
+        }
+
         $this->conditions = $config->get('conditions', 'true');
         $this->parameters = $config->get();
 
