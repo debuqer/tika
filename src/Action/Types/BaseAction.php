@@ -1,13 +1,12 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Action;
+namespace Debuqer\TikaFormBuilder\Action\Types;
 
 
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ExpressionEvaluatorInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ExpressionEvaluator;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 abstract class BaseAction implements ActionInterface
 {

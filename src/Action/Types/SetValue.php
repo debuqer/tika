@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Action;
+namespace Debuqer\TikaFormBuilder\Action\Types;
 
 
 use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;

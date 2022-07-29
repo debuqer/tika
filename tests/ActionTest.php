@@ -2,7 +2,7 @@
 
 
 namespace Debuqer\TikaFormBuilder\Tests;
-use Debuqer\TikaFormBuilder\Action\SetValue;
+use Debuqer\TikaFormBuilder\Action\Types\SetValue;
 use Debuqer\TikaFormBuilder\Tests\Utils\ActionUtility;
 
 class ActionTest extends BasicTestClass

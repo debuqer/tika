@@ -1,9 +1,8 @@
 <?php
 namespace Debuqer\TikaFormBuilder\Tests\Utils;
 
-use Debuqer\TikaFormBuilder\Action\SetValue;
+use Debuqer\TikaFormBuilder\Action\Types\SetValue;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 
 class ActionUtility
 {

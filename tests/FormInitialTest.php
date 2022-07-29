@@ -4,7 +4,7 @@
 namespace Debuqer\TikaFormBuilder\Tests;
 
 
-use Debuqer\TikaFormBuilder\Action\ActionInterface;
+use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;

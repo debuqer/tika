@@ -1,5 +1,5 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Action;
+namespace Debuqer\TikaFormBuilder\Action\Types;
 
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Form;

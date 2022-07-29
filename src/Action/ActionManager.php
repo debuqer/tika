@@ -4,12 +4,13 @@
 namespace Debuqer\TikaFormBuilder\Action;
 
 
+use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
+use Debuqer\TikaFormBuilder\Action\Types\SetValue;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidInputProvider;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidItemConfig;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey;
-use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
 
 class ActionManager
 {
