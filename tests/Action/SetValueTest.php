@@ -27,9 +27,7 @@ class SetValueTest extends TestCase
             ['field' => 'instance.text:fname.value', 'value' => 2]
         );
         $action->run($form);
-        $this->assertEquals('2',
-            $form->getInstance()->getItems()->get('text:fname')->get('value')
-        );
+        $this->assertEquals('2', $form->get('instance.text:fname.value'));
 
         $action = ActionUtility::create('action',
             'set-value',
@@ -38,8 +36,6 @@ class SetValueTest extends TestCase
             ['field' => 'instance.text:lname.value', 'value' => "form.get('instance.text:fname.value') * 3"]
         );
         $action->run($form);
-        $this->assertEquals('6',
-            $form->getInstance()->getItems()->get('text:lname')->get('value')
-        );
+        $this->assertEquals('6', $form->get('instance.text:lname.value'));
     }
 }
