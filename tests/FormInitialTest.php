@@ -8,7 +8,7 @@ use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomProvider;
+use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 
 class FormInitialTest extends BasicTestClass
@@ -47,8 +47,8 @@ class FormInitialTest extends BasicTestClass
 
         $items = $form->getInstance()->getItems();
 
-        $this->assertInstanceOf(MyCutsomProvider::class, $items->get('my-custom-instance:fname'));
-        $this->assertInstanceOf(MyCutsomProvider::class, $items->get('my-custom-instance:lname'));
+        $this->assertInstanceOf(MyCutsomInstance::class, $items->get('my-custom-instance:fname'));
+        $this->assertInstanceOf(MyCutsomInstance::class, $items->get('my-custom-instance:lname'));
     }
 
     public function test_get()

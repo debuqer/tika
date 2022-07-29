@@ -3,7 +3,7 @@ namespace Debuqer\TikaFormBuilder\Tests\Utils;
 
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomAction;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomProvider;
+use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance;
 
 class FormUtility
 {
@@ -15,7 +15,7 @@ class FormUtility
     {
         $model_config->merge([
             'providers' => [
-                'instance:my-custom-instance' => MyCutsomProvider::class,
+                'instance:my-custom-instance' => MyCutsomInstance::class,
                 'actions:my-custom' => MyCustomAction::class,
             ]
         ]);

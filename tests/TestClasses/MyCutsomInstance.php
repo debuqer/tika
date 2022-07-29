@@ -3,7 +3,7 @@ namespace Debuqer\TikaFormBuilder\Tests\TestClasses;
 
 use Debuqer\TikaFormBuilder\Instance\Inputs\BaseInput;
 
-class MyCutsomProvider extends BaseInput
+class MyCutsomInstance extends BaseInput
 {
     public function getName()
     {
