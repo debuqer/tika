@@ -5,8 +5,9 @@ namespace Debuqer\TikaFormBuilder\Instance\Inputs;
 
 
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\Instance\Inputs\Functionalities\SetPropertyInterface;
 
-abstract class BaseInput implements InputInterface
+abstract class BaseInput implements InputInterface, SetPropertyInterface
 {
     /** @var string */
     protected $name;

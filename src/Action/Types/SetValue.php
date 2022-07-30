@@ -7,6 +7,7 @@ namespace Debuqer\TikaFormBuilder\Action\Types;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
 use Debuqer\TikaFormBuilder\Exceptions\NotPropertySettingSupport;
 use Debuqer\TikaFormBuilder\Form;
+use Debuqer\TikaFormBuilder\Instance\Inputs\Functionalities\SetPropertyInterface;
 
 class SetValue extends BaseAction
 {
@@ -37,10 +38,10 @@ class SetValue extends BaseAction
         ]);
 
         $item = $form->get($fieldName);
-        if( method_exists($item, 'setProperty') ) {
+        if( class_implements($item, SetPropertyInterface::class) ) {
             $form->get($fieldName)->setProperty($fieldAttribute, $value);
         } else {
-            throw new NotPropertySettingSupport(sprintf('Item %s does not have setProperty method', $fieldName));
+            throw new NotPropertySettingSupport(sprintf('Item %s does not implements SetPropertyInterface', $fieldName));
         }
     }
 }
