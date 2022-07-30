@@ -12,13 +12,11 @@ class SetValue extends BaseAction
 {
     public function validate()
     {
-        $fieldAddress = $this->getParameters()->get('field', null);
-        if( !$fieldAddress ) {
+        if( ! $this->getParameters()->has('field') ) {
             throw new InvalidActionConfiguration(sprintf('action %s must have field', $this->getName()));
         }
 
-        $expr = $this->getParameters()->get('value');
-        if( !$expr ) {
+        if( ! $this->getParameters()->get('value') ) {
             throw new InvalidActionConfiguration(sprintf('action %s must have field', $this->getName()));
         }
 
