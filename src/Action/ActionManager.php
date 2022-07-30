@@ -26,6 +26,16 @@ class ActionManager
      */
     protected ConfigContainerInterface $providers;
 
+    /**
+     * Provides a safe container for actions
+     *
+     * ActionManager constructor.
+     * @param ConfigContainerInterface $instanceConfig
+     * @param ConfigContainerInterface $providers
+     * @throws InvalidInputProvider
+     * @throws InvalidItemConfig
+     * @throws InvalidItemIdKey
+     */
     public function __construct(ConfigContainerInterface $instanceConfig,
                                 ConfigContainerInterface $providers
     )
@@ -68,11 +78,20 @@ class ActionManager
         }
     }
 
+    /**
+     *
+     * @return ConfigContainerInterface
+     */
     public function getItems()
     {
         return $this->items;
     }
 
+    /**
+     * All action providers may register here
+     *
+     * @param ConfigContainerInterface $providers
+     */
     protected function setProviders(ConfigContainerInterface $providers)
     {
         $this->providers = new ConfigContainer([
