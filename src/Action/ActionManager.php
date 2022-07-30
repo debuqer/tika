@@ -14,10 +14,17 @@ use Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey;
 
 class ActionManager
 {
-    /** @var ConfigContainerInterface  */
+    /**
+     * contains all actions
+     * @var ConfigContainerInterface
+     */
     protected ConfigContainerInterface $items;
-    /** @var ConfigContainerInterface */
-    protected $providers;
+
+    /**
+     * contains providers, all action type that implements ActionInterface
+     * @var ConfigContainerInterface
+     */
+    protected ConfigContainerInterface $providers;
 
     public function __construct(ConfigContainerInterface $instanceConfig,
                                 ConfigContainerInterface $providers

@@ -12,17 +12,38 @@ use Debuqer\TikaFormBuilder\Form;
 
 abstract class BaseAction implements ActionInterface
 {
-    /** @var string */
+    /**
+     * Must be unique in form
+     * @example set-value:actionName
+     * @var string
+     */
     protected $name;
-    /** @var ConfigContainerInterface */
+
+    /**
+     * Action configuration including event, conditions and other parameters
+     * @var ConfigContainerInterface
+     */
     protected $config;
-    /** @var string  */
+
+    /**
+     * Action event, like form.load
+     * @var string
+     */
     protected $event;
-    /** @var ConfigContainerInterface  */
+
+    /**
+     * @var ConfigContainerInterface
+     */
     protected $conditions;
-    /** @var ConfigContainerInterface  */
+
+    /**
+     * @var ConfigContainerInterface
+     */
     protected $parameters;
-    /** @var ExpressionEvaluatorInterface */
+
+    /**
+     * @var ExpressionEvaluatorInterface
+     */
     protected $expressionLanguage;
 
     /**
