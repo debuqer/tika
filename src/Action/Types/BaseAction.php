@@ -36,14 +36,12 @@ abstract class BaseAction implements ActionInterface
     {
         $this->name = $name;
         $this->event = $config->get('event', null);
-        if( !$this->event ) {
-            throw new InvalidActionConfiguration(sprintf('Action %s must have valid event', $name));
-        }
-
         $this->conditions = $config->get('conditions', 'true');
         $this->parameters = $config->get();
 
         $this->expressionLanguage = new ExpressionEvaluator();
+
+        $this->validate();
     }
 
     /**
@@ -83,5 +81,12 @@ abstract class BaseAction implements ActionInterface
         return $this->expressionLanguage->evaluate($this->conditions, [
             'form' => $form
         ]);
+    }
+
+    public function validate()
+    {
+        if( !$this->event ) {
+            throw new InvalidActionConfiguration(sprintf('Action %s must have valid event', $this->getName()));
+        }
     }
 }

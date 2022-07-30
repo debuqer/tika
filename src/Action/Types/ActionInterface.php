@@ -38,4 +38,9 @@ interface ActionInterface
     public function getParameters();
 
     public function isRunnable(Form &$form);
+
+    /**
+     * @return bool
+     */
+    public function validate();
 }

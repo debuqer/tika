@@ -5,11 +5,13 @@ use Debuqer\TikaFormBuilder\Action\Types\SetValue;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomAction;
+use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomRuleReachAction;
 
 class ActionUtility
 {
     protected static $action_types = [
         'my-custom-action' => MyCustomAction::class,
+        'my-custom-rule-reach' => MyCustomRuleReachAction::class,
         'set-value' => SetValue::class
     ];
 
@@ -31,6 +33,7 @@ class ActionUtility
         $configContainer->merge([
             'providers' => [
                 'actions:my-custom' => MyCustomAction::class,
+                'actions:my-custom-rule-reach' => MyCustomRuleReachAction::class,
             ]
         ]);
 

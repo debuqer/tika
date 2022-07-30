@@ -80,4 +80,13 @@ class ActionTest extends BasicTestClass
 
         $action = ActionUtility::create('my-custom-action:action', []);
     }
+
+    public function test_get_error_on_invalid_config()
+    {
+        $this->expectException(InvalidActionConfiguration::class);
+
+        $action = ActionUtility::create('my-custom-rule-reach:action', [
+            'event' => 'form.load'
+        ]);
+    }
 }

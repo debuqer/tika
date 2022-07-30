@@ -41,4 +41,9 @@ class ConfigContainer implements ConfigContainerInterface
     {
         $this->config = $this->config->mergeAppendNewIndex($array);
     }
+
+    public function has($attribute)
+    {
+        return $this->config->has($attribute);
+    }
 }

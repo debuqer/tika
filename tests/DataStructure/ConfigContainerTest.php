@@ -47,6 +47,8 @@ class ConfigContainerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->data['months'][0], $this->cc->get('months.0'));
         $this->assertNull($this->cc->get('seasons.winter'));
         $this->assertEquals('not_defined', $this->cc->get('seasons.winter', 'not_defined'));
+        $this->assertTrue($this->cc->has('seasons.spring'));
+        $this->assertFalse($this->cc->has('seasons.winter'));
     }
 
     public function test_set_data()
