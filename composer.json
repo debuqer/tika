@@ -1,0 +1,27 @@
+{
+    "name": "debuqer/tika-form-builder",
+    "description": "Laravel XForm Builder",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Debuqer\\TikaFormBuilder\\": "src/",
+            "Debuqer\\TikaFormBuilder\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "debuqer",
+            "email": "bagher2g@gmail.com"
+        }
+    ],
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "voku/arrayy": "dev-master",
+        "phpunit/phpunit": "^9",
+        "symfony/expression-language": "6.2.x-dev"
+    }
+}
