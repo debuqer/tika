@@ -7,7 +7,9 @@ use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\EventSubjectInterface;
 use Debuqer\TikaFormBuilder\Event\BaseEvent;
 use Debuqer\TikaFormBuilder\Event\EventInterface;
+use Debuqer\TikaFormBuilder\Event\FormChangeEvent;
 use Debuqer\TikaFormBuilder\Event\FormLoadEvent;
+use Debuqer\TikaFormBuilder\Event\InstanceChangeEvent;
 use Debuqer\TikaFormBuilder\Instance\Instance;
 use SplSubject;
 
@@ -125,6 +127,10 @@ class Form implements \SplObserver, EventSubjectInterface
 
     public function trigger(EventInterface $event)
     {
+        if ( $event instanceof InstanceChangeEvent ) {
+            $this->trigger(new FormChangeEvent($event));
+        }
+
         $event->attach($this);
         $event->notify();
         $event->detach($this);
