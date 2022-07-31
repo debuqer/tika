@@ -10,13 +10,10 @@ use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 
 class EventTest extends \PHPUnit\Framework\TestCase
 {
-    public function test_event_works_in_actions()
+    public function test_form_load_event_works_in_actions()
     {
         $configContainer = new ConfigContainer([
-            'instance' => [
-                'my-custom-instance:fname' => [],
-                'my-custom-instance:lname' => [],
-            ],
+            'instance' => [],
             'actions' => [
                 'my-custom-action:on-form-load' => [
                     'event' => 'form.load',
@@ -29,7 +26,6 @@ class EventTest extends \PHPUnit\Framework\TestCase
         ]);
         $form = FormUtility::createForm($configContainer);
 
-        $form->trigger(new FormLoadEvent($form));
         $this->assertTrue($form->get('meta.custom-action-executed'));
     }
 }

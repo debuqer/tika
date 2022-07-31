@@ -40,6 +40,8 @@ class Form implements \SplObserver
         );
 
         $this->meta = $modelConfig->get('meta', []);
+
+        $this->trigger(new FormLoadEvent($this));
     }
 
     /**
