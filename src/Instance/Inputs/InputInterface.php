@@ -5,6 +5,7 @@ namespace Debuqer\TikaFormBuilder\Instance\Inputs;
 
 
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\Instance\Instance;
 
 interface InputInterface
 {
@@ -17,4 +18,8 @@ interface InputInterface
      * @return mixed
      */
     public function get($propertyName, $fallback = null);
+
+    public function setInstance(Instance &$instance);
+
+    public function getInstance();
 }

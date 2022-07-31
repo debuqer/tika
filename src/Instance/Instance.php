@@ -3,18 +3,29 @@ namespace Debuqer\TikaFormBuilder\Instance;
 
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\DataStructure\Contracts\EventSubjectInterface;
+use Debuqer\TikaFormBuilder\Event\EventInterface;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidInputProvider;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidItemConfig;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey;
+use Debuqer\TikaFormBuilder\Form;
 use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
 use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
 
-class Instance
+class Instance implements EventSubjectInterface
 {
-    /** @var ConfigContainerInterface  */
+    /**
+     * @var ConfigContainerInterface
+     */
     protected ConfigContainerInterface $items;
-    /** @var ConfigContainerInterface */
+    /**
+     * @var ConfigContainerInterface
+     */
     protected $providers;
+    /**
+     * @var Form
+     */
+    protected $form;
 
     public function __construct(ConfigContainerInterface $instanceConfig,
                                 ConfigContainerInterface $providers
@@ -54,7 +65,9 @@ class Instance
                     throw new InvalidInputProvider(sprintf('Item %s provider has not implemented InputInterface', $itemType));
                 }
 
-                $item = new $itemProvider($itemName, new ConfigContainer($itemConfig));
+                /** @var InputInterface $item */
+                $item = (new $itemProvider($itemName, new ConfigContainer($itemConfig)))
+                            ->setInstance($this);
             } else {
                 throw new InvalidItemIdKey(sprintf('Item %s type is not valid', $itemType));
             }
@@ -68,6 +81,18 @@ class Instance
         return $this->items;
     }
 
+    public function setForm(Form &$form)
+    {
+        $this->form = $form;
+
+        return $this;
+    }
+
+    public function getForm()
+    {
+        return $this->form;
+    }
+
     protected function setProviders(ConfigContainerInterface $providers)
     {
         $this->providers = new ConfigContainer([
@@ -78,6 +103,13 @@ class Instance
             if( strpos($customProviderKey, 'instance:') !== false ) {
                 $this->providers->merge([$customProviderKey => $customProviderClass]);
             }
+        }
+    }
+
+    public function trigger(EventInterface $event)
+    {
+        if ( $this->getForm() ) {
+            $this->getForm()->trigger($event);
         }
     }
 }

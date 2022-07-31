@@ -4,12 +4,14 @@ namespace Debuqer\TikaFormBuilder;
 use Debuqer\TikaFormBuilder\Action\ActionManager;
 use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\TikaFormBuilder\DataStructure\Contracts\EventSubjectInterface;
 use Debuqer\TikaFormBuilder\Event\BaseEvent;
+use Debuqer\TikaFormBuilder\Event\EventInterface;
 use Debuqer\TikaFormBuilder\Event\FormLoadEvent;
 use Debuqer\TikaFormBuilder\Instance\Instance;
 use SplSubject;
 
-class Form implements \SplObserver
+class Form implements \SplObserver, EventSubjectInterface
 {
     /** @var ConfigContainerInterface */
     protected $modelConfig;
@@ -61,7 +63,7 @@ class Form implements \SplObserver
             // default providers
         ]);
 
-        $this->instance = new Instance($instance, $providers);
+        $this->instance = (new Instance($instance, $providers))->setForm($this);
     }
 
     protected function buildActions(ConfigContainerInterface $actions, ConfigContainerInterface $providers)
@@ -121,7 +123,7 @@ class Form implements \SplObserver
         return $currentItem;
     }
 
-    public function trigger(BaseEvent $event)
+    public function trigger(EventInterface $event)
     {
         $event->attach($this);
         $event->notify();
