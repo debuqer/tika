@@ -28,7 +28,7 @@ $model_config = new ConfigContainer([
     'instance' => [
         'text:first_name' => [],
         'text:last_name' => [],
-        'text:full_name'
+        'text:full_name' => [],
     ],
     'actions' => [
         'set-value:setting-full-name' => [
