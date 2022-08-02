@@ -21,7 +21,7 @@ class ExpressionEvaluator implements Contracts\ExpressionEvaluatorInterface
      * @param array $data
      * @return mixed
      */
-    public function evaluate($expr, array $data)
+    public function evaluate($expr, array $data = [])
     {
         if ( is_bool($expr) ) {
             return $expr;
