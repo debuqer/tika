@@ -10,7 +10,7 @@ use Debuqer\TikaFormBuilder\Tests\Utils\ActionUtility;
 use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
 use PHPUnit\Framework\TestCase;
 
-class SetValueTest extends TestCase
+class SetItemVisibileStatusTest extends TestCase
 {
     public function test_set_value_action()
     {
@@ -21,25 +21,26 @@ class SetValueTest extends TestCase
             ]
         ]);
         $form = FormUtility::createForm($configContainer);
-        $action = ActionUtility::create('set-value:action',
+        $action = ActionUtility::create('set-item-visible-status:action',
             [
                 'event' => 'form.load',
                 'item' => 'instance.text:fname',
-                'value' => 2
+                'status' => true
             ]
         );
         $action->run($form);
-        $this->assertEquals('2', $form->get('instance.text:fname.value'));
+        $this->assertTrue($form->get('instance.text:fname.visible'));
 
-        $action = ActionUtility::create('set-value:action',
+        $action = ActionUtility::create('set-item-visible-status:action',
             [
                 'event' => 'form.load',
-                'item' => 'instance.text:lname',
-                'value' => "form.get('instance.text:fname.value') * 3"
+                'item' => 'instance.text:fname',
+                'status' => false
             ]
         );
         $action->run($form);
-        $this->assertEquals('6', $form->get('instance.text:lname.value'));
+
+        $this->assertFalse($form->get('instance.text:fname.visible'));
     }
 
     public function test_invalid_parameters_fails()
@@ -54,7 +55,7 @@ class SetValueTest extends TestCase
         $form = FormUtility::createForm($configContainer);
 
         $this->expectException(InvalidActionConfiguration::class);
-        $action = ActionUtility::create('set-value:action', [
+        $action = ActionUtility::create('set-item-visible-status:action', [
             'event' => 'form.load',
         ]);
 

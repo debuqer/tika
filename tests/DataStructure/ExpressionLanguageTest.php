@@ -39,5 +39,9 @@ class ExpressionLanguageTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(6, $expressionLanguage->evaluate('2 + 4', []));
         $this->assertEquals("Hello  Debuqer", $expressionLanguage->evaluate(
             '"Hello " ~" "~ form.get("instance.my-custom-instance:name.value")', $data));
+
+        $this->assertTrue($expressionLanguage->evaluate(true, []));
+        $this->assertFalse($expressionLanguage->evaluate(false, []));
+        $this->assertNull($expressionLanguage->evaluate(null, []));
     }
 }

@@ -86,6 +86,13 @@ abstract class BaseInput implements InputInterface, SetPropertyInterface, EventS
         $this->trigger(new InputChangeEvent($this));
     }
 
+    public function unsetProperty($propertyName)
+    {
+        $this->modelConfig->unset($propertyName);
+
+        $this->trigger(new InputChangeEvent($this));
+    }
+
     public function trigger(EventInterface $event)
     {
         if ( $this->getInstance() ) {

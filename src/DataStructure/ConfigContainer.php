@@ -6,6 +6,11 @@ use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 
 class ConfigContainer implements ConfigContainerInterface
 {
+    /**
+     * @TODO
+     * This class had implemented using Arrayy helper
+     * it should be refactor and use php array instead
+     */
     /** @var Arrayy  */
     protected $config;
 
@@ -30,6 +35,11 @@ class ConfigContainer implements ConfigContainerInterface
     public function set($propertyName, $value)
     {
         $this->config->set($propertyName, $value);
+    }
+
+    public function unset($propertyName)
+    {
+        $this->config->clear($propertyName);
     }
 
     public function toArray()

@@ -6,6 +6,7 @@ namespace Debuqer\TikaFormBuilder\Action;
 
 use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\Action\Types\SetValue;
+use Debuqer\TikaFormBuilder\Action\Types\UnsetValue;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidInputProvider;
@@ -95,7 +96,8 @@ class ActionManager
     protected function setProviders(ConfigContainerInterface $providers)
     {
         $this->providers = new ConfigContainer([
-            'actions:set-value' => SetValue::class
+            'actions:set-value' => SetValue::class,
+            'actions:unset-value' => UnsetValue::class,
         ]);
 
         foreach ($providers->toArray() as $customProviderKey => $customProviderClass) {
