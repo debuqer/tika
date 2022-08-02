@@ -6,6 +6,11 @@ use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 
 class ConfigContainer implements ConfigContainerInterface
 {
+    /**
+     * @TODO
+     * This class had implemented using Arrayy helper
+     * it should be refactor and use php array instead
+     */
     /** @var Arrayy  */
     protected $config;
 
