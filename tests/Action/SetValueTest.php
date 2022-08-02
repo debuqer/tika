@@ -24,7 +24,7 @@ class SetValueTest extends TestCase
         $action = ActionUtility::create('set-value:action',
             [
                 'event' => 'form.load',
-                'field' => 'instance.text:fname.value',
+                'item' => 'instance.text:fname',
                 'value' => 2
             ]
         );
@@ -34,7 +34,7 @@ class SetValueTest extends TestCase
         $action = ActionUtility::create('set-value:action',
             [
                 'event' => 'form.load',
-                'field' => 'instance.text:lname.value',
+                'item' => 'instance.text:lname',
                 'value' => "form.get('instance.text:fname.value') * 3"
             ]
         );

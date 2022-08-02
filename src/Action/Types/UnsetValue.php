@@ -14,8 +14,8 @@ class UnsetValue extends BaseAction
 {
     public function validate()
     {
-        if( ! $this->getParameters()->has('field') ) {
-            throw new InvalidActionConfiguration(sprintf('action %s must have field', $this->getName()));
+        if( ! $this->getParameters()->has('item') ) {
+            throw new InvalidActionConfiguration(sprintf('action %s must have item', $this->getName()));
         }
 
         parent::validate();
@@ -23,15 +23,12 @@ class UnsetValue extends BaseAction
 
     public function run(Form &$form)
     {
-        $fieldAddress = $this->getParameters()->get('field', null);
-
-        $address = explode('.', $fieldAddress);
-        $fieldName = implode('.', array_slice($address, 0, sizeof($address) - 1));
-        $fieldAttribute = $address[sizeof($address) - 1];
+        $fieldName = $this->getParameters()->get('item', null);
+        $property = $this->getParameters()->get('property', 'value');
 
         $item = $form->get($fieldName);
         if( class_implements($item, UnsetPropertyInterface::class) ) {
-            $form->get($fieldName)->unsetProperty($fieldAttribute);
+            $form->get($fieldName)->unsetProperty($property);
         } else {
             throw new NotPropertySettingSupport(sprintf('Item %s does not implements UnsetPropertyInterface', $fieldName));
         }

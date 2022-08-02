@@ -26,7 +26,7 @@ class UnsetValueTest extends TestCase
         $action = ActionUtility::create('unset-value:action',
             [
                 'event' => 'form.load',
-                'field' => 'instance.text:fname.value',
+                'item' => 'instance.text:fname',
             ]
         );
         $action->run($form);

@@ -13,8 +13,8 @@ class SetValue extends BaseAction
 {
     public function validate()
     {
-        if( ! $this->getParameters()->has('field') ) {
-            throw new InvalidActionConfiguration(sprintf('action %s must have field', $this->getName()));
+        if( ! $this->getParameters()->has('item') ) {
+            throw new InvalidActionConfiguration(sprintf('action %s must have item', $this->getName()));
         }
 
         if( ! $this->getParameters()->get('value') ) {
@@ -26,20 +26,18 @@ class SetValue extends BaseAction
 
     public function run(Form &$form)
     {
-        $fieldAddress = $this->getParameters()->get('field', null);
+        $fieldName = $this->getParameters()->get('item', null);
+        $property = $this->getParameters()->get('property', 'value');
 
-        $address = explode('.', $fieldAddress);
-        $fieldName = implode('.', array_slice($address, 0, sizeof($address) - 1));
-        $fieldAttribute = $address[sizeof($address) - 1];
         $expr = $this->getParameters()->get('value');
 
         $value = $this->expressionLanguage->evaluate($expr, [
             'form' => $form,
         ]);
 
-        $item = $form->get($fieldName);
+        $item = $form->get($property);
         if( class_implements($item, SetPropertyInterface::class) ) {
-            $form->get($fieldName)->setProperty($fieldAttribute, $value);
+            $form->get($fieldName)->setProperty($property, $value);
         } else {
             throw new NotPropertySettingSupport(sprintf('Item %s does not implements SetPropertyInterface', $fieldName));
         }
