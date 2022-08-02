@@ -17,12 +17,19 @@ class ExpressionEvaluator implements Contracts\ExpressionEvaluatorInterface
     }
 
     /**
-     * @param string $expr
+     * @param mixed $expr
      * @param array $data
      * @return mixed
      */
-    public function evaluate(string $expr, array $data)
+    public function evaluate($expr, array $data)
     {
+        if ( is_bool($expr) ) {
+            return $expr;
+        }
+        if( is_null($expr) ) {
+            return $expr;
+        }
+
         return $this->engine->evaluate($expr, $data);
     }
 }

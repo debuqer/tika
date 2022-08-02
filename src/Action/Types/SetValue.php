@@ -9,37 +9,20 @@ use Debuqer\TikaFormBuilder\Exceptions\NotPropertySettingSupport;
 use Debuqer\TikaFormBuilder\Form;
 use Debuqer\TikaFormBuilder\Instance\Inputs\Functionalities\SetPropertyInterface;
 
-class SetValue extends BaseAction
+class SetValue extends SetItemProperty
 {
-    public function validate()
+    public function getPropertyName()
     {
-        if( ! $this->getParameters()->has('item') ) {
-            throw new InvalidActionConfiguration(sprintf('action %s must have item', $this->getName()));
-        }
-
-        if( ! $this->getParameters()->get('value') ) {
-            throw new InvalidActionConfiguration(sprintf('action %s must have field', $this->getName()));
-        }
-
-        parent::validate();
+        return 'value';
     }
 
-    public function run(Form &$form)
+    public function getValueContainerAttributeName()
     {
-        $fieldName = $this->getParameters()->get('item', null);
-        $property = $this->getParameters()->get('property', 'value');
+        return 'value';
+    }
 
-        $expr = $this->getParameters()->get('value');
-
-        $value = $this->expressionLanguage->evaluate($expr, [
-            'form' => $form,
-        ]);
-
-        $item = $form->get($property);
-        if( class_implements($item, SetPropertyInterface::class) ) {
-            $form->get($fieldName)->setProperty($property, $value);
-        } else {
-            throw new NotPropertySettingSupport(sprintf('Item %s does not implements SetPropertyInterface', $fieldName));
-        }
+    public function getPropertyDefaultValue()
+    {
+        return null;
     }
 }

@@ -9,7 +9,7 @@ use Debuqer\TikaFormBuilder\Exceptions\NotPropertySettingSupport;
 use Debuqer\TikaFormBuilder\Form;
 use Debuqer\TikaFormBuilder\Instance\Inputs\Functionalities\SetPropertyInterface;
 
-class SetItemVisibleStatus extends BaseAction
+class SetItemProperty extends BaseAction
 {
     public function validate()
     {
@@ -17,8 +17,8 @@ class SetItemVisibleStatus extends BaseAction
             throw new InvalidActionConfiguration(sprintf('action %s must have item', $this->getName()));
         }
 
-        if( ! $this->getParameters()->has('status') ) {
-            throw new InvalidActionConfiguration(sprintf('action %s must have status', $this->getName()));
+        if( ! $this->getParameters()->has($this->getValueContainerAttributeName()) ) {
+            throw new InvalidActionConfiguration(sprintf('action %s must have %s', $this->getName(), $this->getValueContainerAttributeName()));
         }
 
         parent::validate();
@@ -27,13 +27,32 @@ class SetItemVisibleStatus extends BaseAction
     public function run(Form &$form)
     {
         $fieldName = $this->getParameters()->get('item', null);
-        $status = $this->getParameters()->get('status', true);
+        $expr = $this->getParameters()->get($this->getValueContainerAttributeName(), $this->getPropertyDefaultValue());
+
+        $value = $this->expressionLanguage->evaluate($expr, [
+            'form' => $form,
+        ]);
 
         $item = $form->get($fieldName);
         if( class_implements($item, SetPropertyInterface::class) ) {
-            $form->get($fieldName)->setProperty('visible', $status);
+            $form->get($fieldName)->setProperty($this->getPropertyName(), $value);
         } else {
             throw new NotPropertySettingSupport(sprintf('Item %s does not implements SetPropertyInterface', $fieldName));
         }
+    }
+
+    public function getPropertyName()
+    {
+        return 'value';
+    }
+
+    public function getPropertyDefaultValue()
+    {
+        return true;
+    }
+
+    public function getValueContainerAttributeName()
+    {
+        return 'value';
     }
 }
