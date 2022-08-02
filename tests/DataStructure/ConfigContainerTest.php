@@ -63,6 +63,13 @@ class ConfigContainerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($configContainer, $this->cc->get('new_cc'));
     }
 
+    public function test_unset_data()
+    {
+        $this->cc->unset('seasons.spring.months.farvardin');
+        $this->assertFalse($this->cc->has('seasons.spring.months.farvardin'));
+        $this->assertArrayNotHasKey('farvardin', $this->cc->get('seasons.spring.months')->toArray());
+    }
+
     public function test_to_array()
     {
         $this->assertEquals($this->data, $this->cc->toArray());
