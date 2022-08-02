@@ -33,7 +33,7 @@ $model_config = new ConfigContainer([
     'actions' => [
         'set-value:setting-full-name' => [
             'event' => 'form.change',
-            'field' => 'instance.text:full_name.value',
+            'item' => 'instance.text:full_name',
             'value' => 'form.get("instance.text:first_name.value") ~" " ~ form.get("instance.text:last_name.value")',
             'consitions' => 'form.get("instance.text:first_name.value") == "john" '
         ]
