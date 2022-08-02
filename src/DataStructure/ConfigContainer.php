@@ -32,6 +32,11 @@ class ConfigContainer implements ConfigContainerInterface
         $this->config->set($propertyName, $value);
     }
 
+    public function unset($propertyName)
+    {
+        $this->config->remove($propertyName);
+    }
+
     public function toArray()
     {
         return $this->config->toArray();

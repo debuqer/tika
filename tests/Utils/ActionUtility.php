@@ -2,6 +2,7 @@
 namespace Debuqer\TikaFormBuilder\Tests\Utils;
 
 use Debuqer\TikaFormBuilder\Action\Types\SetValue;
+use Debuqer\TikaFormBuilder\Action\Types\UnsetValue;
 use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomAction;
@@ -12,7 +13,8 @@ class ActionUtility
     protected static $action_types = [
         'my-custom-action' => MyCustomAction::class,
         'my-custom-rule-reach' => MyCustomRuleReachAction::class,
-        'set-value' => SetValue::class
+        'set-value' => SetValue::class,
+        'unset-value' => UnsetValue::class,
     ];
 
     /**
