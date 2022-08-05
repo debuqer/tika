@@ -72,9 +72,10 @@ abstract class BaseInput implements InputInterface, SetPropertyInterface, EventS
     /**
      * @param $propertyName
      * @param null $fallback
+     * @param bool $strict
      * @return mixed
      */
-    public function get($propertyName, $fallback = null)
+    public function get($propertyName, $fallback = null, $strict = false)
     {
         return $this->modelConfig->get($propertyName, $fallback);
     }

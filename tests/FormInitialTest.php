@@ -91,4 +91,21 @@ class FormInitialTest extends BasicTestClass
         $form = FormUtility::createForm($configContainer);
         $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom-action:on-form-load'));
     }
+
+    public function test_input_validation()
+    {
+        $configContainer = new ConfigContainer([
+            'instance' => [
+                'my-custom-instance:fname' => [
+                    'validations' => [
+                        'not-null' => ['message' => 'aa'],
+                    ]
+                ],
+                'my-custom-instance:lname' => [],
+            ]
+        ]);
+        $form = FormUtility::createForm($configContainer);
+
+        $this->assertFalse($form->validate());
+    }
 }

@@ -3,9 +3,13 @@
 
 namespace Debuqer\TikaFormBuilder\Validation;
 
+use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
+use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\Exceptions\InvalidValidationProvider;
 use Symfony\Component\Validator\Constraints as Assert;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ValidationManagerInterface;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validation;
 
 class ValidationManager implements ValidationManagerInterface
@@ -78,7 +82,7 @@ class ValidationManager implements ValidationManagerInterface
     protected $validator;
 
     /**
-     * @var array
+     * @var ConfigContainerInterface
      */
     protected $errors;
 
@@ -90,13 +94,27 @@ class ValidationManager implements ValidationManagerInterface
     public function __construct()
     {
         $this->validator = Validation::createValidator();
+        $this->errors = new ConfigContainer([]);
     }
 
     public function validate($data, $rules = [])
     {
-        $this->errors = $this->validator->validate($data, $this->getConstraints($rules));
+       foreach ($data as $index => $value) {
+            $itemRules = isset($rules[$index]) ? $rules[$index] : [];
+            foreach ($itemRules as $itemRule => $itemParameter) {
+                $constraint = $this->getItemConstraint($itemRule, $itemParameter);
+                /** @var ConstraintViolationList $errorsList */
+                $errorsList = $this->validator->validate($value, $constraint);
 
-        $this->isValid = ( count($this->errors) == 0 );
+                /** @var ConstraintViolation $error */
+                $errors = [];
+                foreach ($errorsList->getIterator() as $error) {
+
+                    $errors[] = $error->getMessage();
+                }
+                $this->errors->set($index, $errors);
+            }
+       }
     }
 
     public function isValid()
@@ -104,22 +122,15 @@ class ValidationManager implements ValidationManagerInterface
         return $this->isValid;
     }
 
-    public function getConstraints($rules)
+    /**
+     * @return ConfigContainerInterface
+     */
+    public function getErrors()
     {
-        $constraints = [];
-        foreach ($rules as $key => $ruleList) {
-            $itemConstraints = [];
-            foreach ($ruleList as $ruleName => $ruleParameter) {
-                $itemConstraints[] = $this->getItemConstraints($ruleName, $ruleParameter);
-            }
-
-            $constraints[$key] = new Assert\All($itemConstraints);
-        }
-
-        return $constraints;
+        return $this->errors;
     }
 
-    protected function getItemConstraints($ruleName, $ruleParameters)
+    protected function getItemConstraint($ruleName, $ruleParameters)
     {
         if( isset($this->constraints[$ruleName]) ) {
             $className = $this->constraints[$ruleName];

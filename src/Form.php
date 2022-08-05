@@ -5,12 +5,15 @@ use Debuqer\TikaFormBuilder\Action\ActionManager;
 use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\EventSubjectInterface;
-use Debuqer\TikaFormBuilder\Event\BaseEvent;
+use Debuqer\TikaFormBuilder\Event\AfterValidateEvent;
+use Debuqer\TikaFormBuilder\Event\BeforeValidateEvent;
 use Debuqer\TikaFormBuilder\Event\EventInterface;
 use Debuqer\TikaFormBuilder\Event\FormChangeEvent;
 use Debuqer\TikaFormBuilder\Event\FormLoadEvent;
 use Debuqer\TikaFormBuilder\Event\InstanceChangeEvent;
+use Debuqer\TikaFormBuilder\Instance\Inputs\BaseInput;
 use Debuqer\TikaFormBuilder\Instance\Instance;
+use Debuqer\TikaFormBuilder\Validation\ValidationManager;
 use SplSubject;
 
 class Form implements \SplObserver, EventSubjectInterface
@@ -26,6 +29,9 @@ class Form implements \SplObserver, EventSubjectInterface
 
     /** @var ConfigContainerInterface */
     protected ConfigContainerInterface $meta;
+
+    /** @var ConfigContainerInterface */
+    protected $errors;
 
     /** @var  array */
     protected array $observers;
@@ -134,6 +140,33 @@ class Form implements \SplObserver, EventSubjectInterface
         $event->attach($this);
         $event->notify();
         $event->detach($this);
+    }
+
+    public function validate()
+    {
+        $this->trigger(new BeforeValidateEvent($this));
+
+        /**
+         * @var  $itemId
+         * @var BaseInput $item
+         */
+        $data = [];
+        $rules = [];
+        foreach ($this->getInstance()->getItems()->toArray() as $itemId => $item) {
+            if ( $item instanceof BaseInput ) {
+                $data[$itemId] = $item->get('value', null, true);
+                $rules[$itemId] = $item->get('validations', [], true)->toArray();
+            }
+        }
+
+        $validator = new ValidationManager();
+        $validator->validate($data, $rules);
+
+        $errors = $validator->getErrors();
+
+        $this->trigger(new AfterValidateEvent($this));
+
+        return ( count($errors->toArray()) == 0 );
     }
 
     public function update(SplSubject $event)
