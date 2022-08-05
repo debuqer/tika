@@ -31,4 +31,21 @@ class ValidatorTest extends TestCase
 
         $this->assertTrue($this->validator->isValid());
     }
+
+    public function test_validator_asserts_all_fields()
+    {
+        $this->validator->validate([
+            'a' => true,
+            'b' => true,
+        ], [
+            'a' => [
+                'is-true' => [],
+            ],
+            'b' => [
+                'is-false' => [],
+            ]
+        ]);
+
+        $this->assertFalse($this->validator->isValid());
+    }
 }
