@@ -1,15 +1,15 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Tests\Utils;
+namespace Debuqer\Tika\Tests\Utils;
 
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomAction;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\Tests\TestClasses\MyCustomAction;
+use Debuqer\Tika\Tests\TestClasses\MyCutsomInstance;
 
 class FormUtility
 {
     /**
      * @param array $model_config
-     * @return \Debuqer\TikaFormBuilder\Form
+     * @return \Debuqer\Tika\Form
      */
     public static function createForm(ConfigContainerInterface $model_config)
     {
@@ -19,6 +19,6 @@ class FormUtility
                 'actions:my-custom-action' => MyCustomAction::class,
             ]
         ]);
-        return new \Debuqer\TikaFormBuilder\Form($model_config);
+        return new \Debuqer\Tika\Form($model_config);
     }
 }

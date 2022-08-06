@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests\Action;
+namespace Debuqer\Tika\Tests\Action;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
-use Debuqer\TikaFormBuilder\Tests\Utils\ActionUtility;
-use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\Exceptions\InvalidActionConfiguration;
+use Debuqer\Tika\Tests\Utils\ActionUtility;
+use Debuqer\Tika\Tests\Utils\FormUtility;
 use PHPUnit\Framework\TestCase;
 
 class SetItemVisibileStatusTest extends TestCase

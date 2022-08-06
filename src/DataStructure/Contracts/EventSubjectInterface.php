@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\DataStructure\Contracts;
+namespace Debuqer\Tika\DataStructure\Contracts;
 
 
-use Debuqer\TikaFormBuilder\Event\EventInterface;
+use Debuqer\Tika\Event\EventInterface;
 
 interface EventSubjectInterface
 {

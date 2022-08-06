@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests\Event;
+namespace Debuqer\Tika\Tests\Event;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\Tests\Utils\FormUtility;
 
 class EventTest extends \PHPUnit\Framework\TestCase
 {

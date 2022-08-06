@@ -1,5 +1,5 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Instance\Inputs\Functionalities;
+namespace Debuqer\Tika\Instance\Inputs\Functionalities;
 
 interface UnsetPropertyInterface
 {

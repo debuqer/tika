@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Validation;
+namespace Debuqer\Tika\Validation;
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidValidationProvider;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\Exceptions\InvalidValidationProvider;
 use Symfony\Component\Validator\Constraints as Assert;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ValidationManagerInterface;
+use Debuqer\Tika\DataStructure\Contracts\ValidationManagerInterface;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validation;

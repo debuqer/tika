@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Event;
+namespace Debuqer\Tika\Event;
 
 
 abstract class BaseEvent implements EventInterface

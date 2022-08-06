@@ -1,12 +1,12 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Tests\Utils;
+namespace Debuqer\Tika\Tests\Utils;
 
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 
 class InputUtility
 {
     protected static $input_types = [
-        'text' => \Debuqer\TikaFormBuilder\Instance\Inputs\TextInput::class
+        'text' => \Debuqer\Tika\Instance\Inputs\TextInput::class
     ];
 
     /**

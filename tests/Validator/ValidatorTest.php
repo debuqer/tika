@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests\Validator;
+namespace Debuqer\Tika\Tests\Validator;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ValidationManagerInterface;
-use Debuqer\TikaFormBuilder\Form;
-use Debuqer\TikaFormBuilder\Validation\ValidationManager;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\DataStructure\Contracts\ValidationManagerInterface;
+use Debuqer\Tika\Form;
+use Debuqer\Tika\Validation\ValidationManager;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validation;
 

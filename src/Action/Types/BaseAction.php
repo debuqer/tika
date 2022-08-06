@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Action\Types;
+namespace Debuqer\Tika\Action\Types;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ExpressionEvaluatorInterface;
-use Debuqer\TikaFormBuilder\DataStructure\ExpressionEvaluator;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
-use Debuqer\TikaFormBuilder\Form;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\Contracts\ExpressionEvaluatorInterface;
+use Debuqer\Tika\DataStructure\ExpressionEvaluator;
+use Debuqer\Tika\Exceptions\InvalidActionConfiguration;
+use Debuqer\Tika\Form;
 
 abstract class BaseAction implements ActionInterface
 {

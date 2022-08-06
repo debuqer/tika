@@ -1,7 +1,7 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Tests\TestClasses;
+namespace Debuqer\Tika\Tests\TestClasses;
 
-use Debuqer\TikaFormBuilder\Instance\Inputs\BaseInput;
+use Debuqer\Tika\Instance\Inputs\BaseInput;
 
 class MyCutsomInstance extends BaseInput
 {

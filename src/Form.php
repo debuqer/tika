@@ -1,19 +1,19 @@
 <?php
-namespace Debuqer\TikaFormBuilder;
+namespace Debuqer\Tika;
 
-use Debuqer\TikaFormBuilder\Action\ActionManager;
-use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\EventSubjectInterface;
-use Debuqer\TikaFormBuilder\Event\AfterValidateEvent;
-use Debuqer\TikaFormBuilder\Event\BeforeValidateEvent;
-use Debuqer\TikaFormBuilder\Event\EventInterface;
-use Debuqer\TikaFormBuilder\Event\FormChangeEvent;
-use Debuqer\TikaFormBuilder\Event\FormLoadEvent;
-use Debuqer\TikaFormBuilder\Event\InstanceChangeEvent;
-use Debuqer\TikaFormBuilder\Instance\Inputs\BaseInput;
-use Debuqer\TikaFormBuilder\Instance\Instance;
-use Debuqer\TikaFormBuilder\Validation\ValidationManager;
+use Debuqer\Tika\Action\ActionManager;
+use Debuqer\Tika\Action\Types\ActionInterface;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
+use Debuqer\Tika\Event\AfterValidateEvent;
+use Debuqer\Tika\Event\BeforeValidateEvent;
+use Debuqer\Tika\Event\EventInterface;
+use Debuqer\Tika\Event\FormChangeEvent;
+use Debuqer\Tika\Event\FormLoadEvent;
+use Debuqer\Tika\Event\InstanceChangeEvent;
+use Debuqer\Tika\Instance\Inputs\BaseInput;
+use Debuqer\Tika\Instance\Instance;
+use Debuqer\Tika\Validation\ValidationManager;
 use SplSubject;
 
 class Form implements \SplObserver, EventSubjectInterface

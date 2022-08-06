@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests;
+namespace Debuqer\Tika\Tests;
 
 
-use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
-use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance;
-use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+use Debuqer\Tika\Action\Types\ActionInterface;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\Instance\Inputs\InputInterface;
+use Debuqer\Tika\Instance\Inputs\TextInput;
+use Debuqer\Tika\Tests\TestClasses\MyCutsomInstance;
+use Debuqer\Tika\Tests\Utils\FormUtility;
 
 class FormInitialTest extends BasicTestClass
 {

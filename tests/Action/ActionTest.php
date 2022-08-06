@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests;
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomAction;
-use Debuqer\TikaFormBuilder\Tests\Utils\ActionUtility;
-use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+namespace Debuqer\Tika\Tests;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\Exceptions\InvalidActionConfiguration;
+use Debuqer\Tika\Tests\TestClasses\MyCustomAction;
+use Debuqer\Tika\Tests\Utils\ActionUtility;
+use Debuqer\Tika\Tests\Utils\FormUtility;
 
 class ActionTest extends BasicTestClass
 {

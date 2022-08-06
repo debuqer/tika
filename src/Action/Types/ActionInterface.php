@@ -1,8 +1,8 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Action\Types;
+namespace Debuqer\Tika\Action\Types;
 
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\Form;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\Form;
 
 interface ActionInterface
 {

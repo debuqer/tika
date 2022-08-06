@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests\TestClasses;
+namespace Debuqer\Tika\Tests\TestClasses;
 
 
-use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
-use Debuqer\TikaFormBuilder\Form;
+use Debuqer\Tika\Exceptions\InvalidActionConfiguration;
+use Debuqer\Tika\Form;
 
-class MyCustomRuleReachAction extends \Debuqer\TikaFormBuilder\Action\Types\BaseAction
+class MyCustomRuleReachAction extends \Debuqer\Tika\Action\Types\BaseAction
 {
     public function validate()
     {

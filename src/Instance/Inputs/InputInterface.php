@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Instance\Inputs;
+namespace Debuqer\Tika\Instance\Inputs;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\Instance\Instance;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\Instance\Instance;
 
 interface InputInterface
 {
