@@ -99,7 +99,7 @@ class ValidationManager implements ValidationManagerInterface
 
     public function validate($data, $rules = [])
     {
-       foreach ($data as $index => $value) {
+        foreach ($data as $index => $value) {
             $itemRules = isset($rules[$index]) ? $rules[$index] : [];
             foreach ($itemRules as $itemRule => $itemParameter) {
                 $constraint = $this->getItemConstraint($itemRule, $itemParameter);
@@ -109,12 +109,16 @@ class ValidationManager implements ValidationManagerInterface
                 /** @var ConstraintViolation $error */
                 $errors = [];
                 foreach ($errorsList->getIterator() as $error) {
-
                     $errors[] = $error->getMessage();
                 }
-                $this->errors->set($index, $errors);
             }
-       }
+
+            if ( count($errors) ) {
+                $this->isValid = false;
+            }
+
+            $this->errors->set($index, $errors);
+        }
     }
 
     public function isValid()
