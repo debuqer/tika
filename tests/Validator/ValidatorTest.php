@@ -4,7 +4,9 @@
 namespace Debuqer\TikaFormBuilder\Tests\Validator;
 
 
+use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
 use Debuqer\TikaFormBuilder\DataStructure\Contracts\ValidationManagerInterface;
+use Debuqer\TikaFormBuilder\Form;
 use Debuqer\TikaFormBuilder\Validation\ValidationManager;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validation;
@@ -47,5 +49,24 @@ class ValidatorTest extends TestCase
         ]);
 
         $this->assertFalse($this->validator->isValid());
+    }
+
+    public function test_validation_in_form()
+    {
+        $model_config = new ConfigContainer([
+            'instance' => [
+                'text:fname' => [
+                    'validations' => ['not-null' => []],
+                ],
+                'text:lname' => [
+                    'validations' => ['not-null' => []],
+                ],
+            ]
+        ]);
+
+        $form = new Form($model_config);
+        $is_valid = $form->validate();
+
+        $this->assertFalse($is_valid);
     }
 }
