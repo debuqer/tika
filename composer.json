@@ -22,6 +22,8 @@
     "require": {
         "voku/arrayy": "dev-master",
         "phpunit/phpunit": "^9",
-        "symfony/expression-language": "6.2.x-dev"
+        "symfony/expression-language": "6.2.x-dev",
+        "symfony/validator": "6.2.x-dev",
+        "doctrine/annotations": "1.14.x-dev"
     }
 }

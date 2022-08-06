@@ -46,3 +46,24 @@ $form = new Form();
 As it shows, this action (setting-full-name) will set name_status field to "name updated!" message whenever form have changed.
 
 
+**Validation**
+
+You may pass rules to your inputs in order to validate them
+```php 
+$model_config = new ConfigContainer([
+    'instance' => [
+        'text:first_name' => [
+            'validations' => [
+                'not-null' => [],
+            ]
+        ],
+        'text:last_name' => [],
+    ],
+    'actions' => [
+        'validate:submit-form' => [
+            'event' => 'on-submit',
+        ]
+    ]   
+]);
+$form = new Form();
+```
