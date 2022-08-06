@@ -101,13 +101,13 @@ class ValidationManager implements ValidationManagerInterface
     {
         foreach ($data as $index => $value) {
             $itemRules = isset($rules[$index]) ? $rules[$index] : [];
+            $errors = [];
             foreach ($itemRules as $itemRule => $itemParameter) {
                 $constraint = $this->getItemConstraint($itemRule, $itemParameter);
                 /** @var ConstraintViolationList $errorsList */
                 $errorsList = $this->validator->validate($value, $constraint);
 
                 /** @var ConstraintViolation $error */
-                $errors = [];
                 foreach ($errorsList->getIterator() as $error) {
                     $errors[] = $error->getMessage();
                 }

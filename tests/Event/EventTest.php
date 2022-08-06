@@ -89,4 +89,26 @@ class EventTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($form->get('meta.custom-action-executed'));
     }
+
+    public function test_form_before_validation_event_works()
+    {
+        $configContainer = new ConfigContainer([
+            'instance' => [
+                'my-custom-instance:fname' => []
+            ],
+            'actions' => [
+                'my-custom-action:input-change' => [
+                    'event' => 'form.validate.before'
+                ],
+            ],
+            'meta' => [
+                'custom-action-executed' => false,
+            ]
+        ]);
+        $form = FormUtility::createForm($configContainer);
+        $form->get('instance.my-custom-instance:fname')->setProperty('value', 'hi');
+        $form->validate();
+
+        $this->assertTrue($form->get('meta.custom-action-executed'));
+    }
 }
