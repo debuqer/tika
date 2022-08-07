@@ -162,11 +162,11 @@ class Form implements \SplObserver, EventSubjectInterface
         $validator = new ValidationManager();
         $validator->validate($data, $rules);
 
-        $errors = $validator->getErrors();
+        $this->errors = $validator->getErrors();
 
         $this->trigger(new AfterValidateEvent($this));
 
-        return ( count($errors->toArray()) == 0 );
+        return ( count($this->errors->toArray()) == 0 );
     }
 
     public function update(SplSubject $event)
@@ -180,5 +180,10 @@ class Form implements \SplObserver, EventSubjectInterface
                 }
             }
         }
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
     }
 }

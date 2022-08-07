@@ -92,13 +92,13 @@ class FormInitialTest extends BasicTestClass
         $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom-action:on-form-load'));
     }
 
-    public function test_input_validation()
+    public function test_input_validation_with_custom_message()
     {
         $configContainer = new ConfigContainer([
             'instance' => [
                 'my-custom-instance:fname' => [
                     'validations' => [
-                        'not-null' => ['message' => 'aa'],
+                        'not-null' => ['message' => 'custom error message'],
                     ]
                 ],
                 'my-custom-instance:lname' => [],
@@ -107,5 +107,11 @@ class FormInitialTest extends BasicTestClass
         $form = FormUtility::createForm($configContainer);
 
         $this->assertFalse($form->validate());
+        $this->assertEquals([
+            'my-custom-instance:fname' => [
+                'custom error message'
+            ],
+            'my-custom-instance:lname' => []
+        ], $form->getErrors()->toArray());
     }
 }
