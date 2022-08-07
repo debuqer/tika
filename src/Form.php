@@ -3,6 +3,8 @@ namespace Debuqer\Tika;
 
 use Debuqer\Tika\Action\ActionManager;
 use Debuqer\Tika\Action\Types\ActionInterface;
+use Debuqer\Tika\Action\Types\SetValue;
+use Debuqer\Tika\Action\Types\UnsetValue;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
 use Debuqer\Tika\Event\AfterValidateEvent;
@@ -12,6 +14,7 @@ use Debuqer\Tika\Event\FormChangeEvent;
 use Debuqer\Tika\Event\FormLoadEvent;
 use Debuqer\Tika\Event\InstanceChangeEvent;
 use Debuqer\Tika\Instance\Inputs\BaseInput;
+use Debuqer\Tika\Instance\Inputs\TextInput;
 use Debuqer\Tika\Instance\Instance;
 use Debuqer\Tika\Validation\ValidationManager;
 use SplSubject;
@@ -68,7 +71,7 @@ class Form implements \SplObserver, EventSubjectInterface
     protected function buildInstance(ConfigContainerInterface $instance, ConfigContainerInterface $providers)
     {
         $providers->merge([
-            // default providers
+            'instance:text' => TextInput::class,
         ]);
 
         $this->instance = (new Instance($instance, $providers))->setForm($this);
@@ -77,7 +80,8 @@ class Form implements \SplObserver, EventSubjectInterface
     protected function buildActions(ConfigContainerInterface $actions, ConfigContainerInterface $providers)
     {
         $providers->merge([
-            // default providers
+            'actions:set-value' => SetValue::class,
+            'actions:unset-value' => UnsetValue::class,
         ]);
 
         $this->actions = new ActionManager($actions, $providers);

@@ -98,7 +98,7 @@ class Instance implements EventSubjectInterface
     protected function setProviders(ConfigContainerInterface $providers)
     {
         $this->providers = new ConfigContainer([
-            'instance:text' => TextInput::class,
+
         ]);
 
         foreach ($providers->toArray() as $customProviderKey => $customProviderClass) {
