@@ -35,7 +35,7 @@ class EventTest extends \PHPUnit\Framework\TestCase
             ],
             'actions' => [
                 'my-custom-action:input-change' => [
-                    'event' => 'input.change'
+                    'event' => 'input.change.after'
                 ],
             ],
             'meta' => [
