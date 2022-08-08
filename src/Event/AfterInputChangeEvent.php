@@ -5,7 +5,7 @@ namespace Debuqer\Tika\Event;
 
 
 
-class InputChangeEvent extends BaseEvent
+class AfterInputChangeEvent extends BaseEvent
 {
     public function getName()
     {
