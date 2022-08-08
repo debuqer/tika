@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Action\Types;
+namespace Debuqer\Tika\Action\Types;
 
 
-use Debuqer\TikaFormBuilder\Exceptions\InvalidActionConfiguration;
-use Debuqer\TikaFormBuilder\Exceptions\NotPropertySettingSupport;
-use Debuqer\TikaFormBuilder\Form;
-use Debuqer\TikaFormBuilder\Instance\Inputs\Functionalities\SetPropertyInterface;
+use Debuqer\Tika\Exceptions\InvalidActionConfiguration;
+use Debuqer\Tika\Exceptions\NotPropertySettingSupport;
+use Debuqer\Tika\Form;
+use Debuqer\Tika\Instance\Inputs\Functionalities\SetPropertyInterface;
 
 class SetItemProperty extends BaseAction
 {

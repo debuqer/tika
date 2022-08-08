@@ -14,7 +14,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     public function test_error_on_invalid_type()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey::class);
+        $this->expectException(\Debuqer\Tika\Exceptions\InvalidItemIdKey::class);
 
         $this->createInstance([
             'invalid:a' => [],
@@ -23,7 +23,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     public function test_error_on_invalid_item_id()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey::class);
+        $this->expectException(\Debuqer\Tika\Exceptions\InvalidItemIdKey::class);
 
         $this->createInstance([
             '' => [],
@@ -32,7 +32,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     public function test_error_on_invalid_item_id_3_section()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey::class);
+        $this->expectException(\Debuqer\Tika\Exceptions\InvalidItemIdKey::class);
 
         $this->createInstance([
             'my-custom-instance:a:b' => [],
@@ -46,14 +46,14 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
         ], []);
 
         $this->assertInstanceOf(
-            \Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance::class,
+            \Debuqer\Tika\Tests\TestClasses\MyCutsomInstance::class,
             $instance->getItems()->get('my-custom-instance:a')
         );
     }
 
     public function test_error_on_invalid_config()
     {
-        $this->expectException(\Debuqer\TikaFormBuilder\Exceptions\InvalidItemConfig::class);
+        $this->expectException(\Debuqer\Tika\Exceptions\InvalidItemConfig::class);
 
         $this->createInstance([
             'my-custom-instance:a' => 'invalid_config_',
@@ -65,7 +65,7 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
         $instance = $this->createInstance([
             'custom_provider:a' => [],
         ], [
-            'instance:custom_provider' => \Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance::class
+            'instance:custom_provider' => \Debuqer\Tika\Tests\TestClasses\MyCutsomInstance::class
         ]);
 
         $this->assertNotNull($instance);
@@ -73,13 +73,13 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     protected function createInstance($config_array, $providers_config)
     {
-        $config = new \Debuqer\TikaFormBuilder\DataStructure\ConfigContainer($config_array);
-        $providers = new \Debuqer\TikaFormBuilder\DataStructure\ConfigContainer($providers_config);
+        $config = new \Debuqer\Tika\DataStructure\ConfigContainer($config_array);
+        $providers = new \Debuqer\Tika\DataStructure\ConfigContainer($providers_config);
 
         $providers->merge([
-            'instance:my-custom-instance' => \Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance::class,
+            'instance:my-custom-instance' => \Debuqer\Tika\Tests\TestClasses\MyCutsomInstance::class,
         ]);
 
-        return new Debuqer\TikaFormBuilder\Instance\Instance($config, $providers);
+        return new Debuqer\Tika\Instance\Instance($config, $providers);
     }
 }

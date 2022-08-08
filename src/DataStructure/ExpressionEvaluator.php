@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\DataStructure;
+namespace Debuqer\Tika\DataStructure;
 
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;

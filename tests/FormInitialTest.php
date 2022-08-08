@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests;
+namespace Debuqer\Tika\Tests;
 
 
-use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
-use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCutsomInstance;
-use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+use Debuqer\Tika\Action\Types\ActionInterface;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\Instance\Inputs\InputInterface;
+use Debuqer\Tika\Instance\Inputs\TextInput;
+use Debuqer\Tika\Tests\TestClasses\MyCutsomInstance;
+use Debuqer\Tika\Tests\Utils\FormUtility;
 
 class FormInitialTest extends BasicTestClass
 {
@@ -92,13 +92,13 @@ class FormInitialTest extends BasicTestClass
         $this->assertInstanceOf(ActionInterface::class, $form->get('actions.my-custom-action:on-form-load'));
     }
 
-    public function test_input_validation()
+    public function test_input_validation_with_custom_message()
     {
         $configContainer = new ConfigContainer([
             'instance' => [
                 'my-custom-instance:fname' => [
                     'validations' => [
-                        'not-null' => ['message' => 'aa'],
+                        'not-null' => ['message' => 'custom error message'],
                     ]
                 ],
                 'my-custom-instance:lname' => [],
@@ -107,5 +107,11 @@ class FormInitialTest extends BasicTestClass
         $form = FormUtility::createForm($configContainer);
 
         $this->assertFalse($form->validate());
+        $this->assertEquals([
+            'my-custom-instance:fname' => [
+                'custom error message'
+            ],
+            'my-custom-instance:lname' => []
+        ], $form->getErrors()->toArray());
     }
 }

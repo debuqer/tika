@@ -1,18 +1,18 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Instance;
+namespace Debuqer\Tika\Instance;
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\EventSubjectInterface;
-use Debuqer\TikaFormBuilder\Event\EventInterface;
-use Debuqer\TikaFormBuilder\Event\InputChangeEvent;
-use Debuqer\TikaFormBuilder\Event\InstanceChangeEvent;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidInputProvider;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidItemConfig;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey;
-use Debuqer\TikaFormBuilder\Form;
-use Debuqer\TikaFormBuilder\Instance\Inputs\InputInterface;
-use Debuqer\TikaFormBuilder\Instance\Inputs\TextInput;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
+use Debuqer\Tika\Event\EventInterface;
+use Debuqer\Tika\Event\InputChangeEvent;
+use Debuqer\Tika\Event\InstanceChangeEvent;
+use Debuqer\Tika\Exceptions\InvalidInputProvider;
+use Debuqer\Tika\Exceptions\InvalidItemConfig;
+use Debuqer\Tika\Exceptions\InvalidItemIdKey;
+use Debuqer\Tika\Form;
+use Debuqer\Tika\Instance\Inputs\InputInterface;
+use Debuqer\Tika\Instance\Inputs\TextInput;
 
 class Instance implements EventSubjectInterface
 {
@@ -98,7 +98,7 @@ class Instance implements EventSubjectInterface
     protected function setProviders(ConfigContainerInterface $providers)
     {
         $this->providers = new ConfigContainer([
-            'instance:text' => TextInput::class,
+
         ]);
 
         foreach ($providers->toArray() as $customProviderKey => $customProviderClass) {

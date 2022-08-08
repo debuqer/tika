@@ -1,17 +1,17 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Action;
+namespace Debuqer\Tika\Action;
 
 
-use Debuqer\TikaFormBuilder\Action\Types\ActionInterface;
-use Debuqer\TikaFormBuilder\Action\Types\SetValue;
-use Debuqer\TikaFormBuilder\Action\Types\UnsetValue;
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidInputProvider;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidItemConfig;
-use Debuqer\TikaFormBuilder\Exceptions\InvalidItemIdKey;
+use Debuqer\Tika\Action\Types\ActionInterface;
+use Debuqer\Tika\Action\Types\SetValue;
+use Debuqer\Tika\Action\Types\UnsetValue;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\Exceptions\InvalidInputProvider;
+use Debuqer\Tika\Exceptions\InvalidItemConfig;
+use Debuqer\Tika\Exceptions\InvalidItemIdKey;
 
 class ActionManager
 {
@@ -96,8 +96,7 @@ class ActionManager
     protected function setProviders(ConfigContainerInterface $providers)
     {
         $this->providers = new ConfigContainer([
-            'actions:set-value' => SetValue::class,
-            'actions:unset-value' => UnsetValue::class,
+
         ]);
 
         foreach ($providers->toArray() as $customProviderKey => $customProviderClass) {

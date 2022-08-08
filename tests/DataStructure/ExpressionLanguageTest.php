@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests\DataStructure;
+namespace Debuqer\Tika\Tests\DataStructure;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\ExpressionEvaluator;
-use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\DataStructure\ExpressionEvaluator;
+use Debuqer\Tika\Tests\Utils\FormUtility;
 
 class ExpressionLanguageTest extends \PHPUnit\Framework\TestCase
 {

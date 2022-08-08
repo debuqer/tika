@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests\TestClasses;
+namespace Debuqer\Tika\Tests\TestClasses;
 
 
-use Debuqer\TikaFormBuilder\Form;
+use Debuqer\Tika\Form;
 
-class MyCustomAction extends \Debuqer\TikaFormBuilder\Action\Types\BaseAction
+class MyCustomAction extends \Debuqer\Tika\Action\Types\BaseAction
 {
 
     public function run(Form &$form)

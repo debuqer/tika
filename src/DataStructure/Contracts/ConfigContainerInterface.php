@@ -1,5 +1,5 @@
 <?php
-namespace Debuqer\TikaFormBuilder\DataStructure\Contracts;
+namespace Debuqer\Tika\DataStructure\Contracts;
 
 interface ConfigContainerInterface
 {

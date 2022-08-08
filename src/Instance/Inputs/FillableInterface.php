@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Instance\Inputs;
+namespace Debuqer\Tika\Instance\Inputs;
 
 
 interface FillableInterface

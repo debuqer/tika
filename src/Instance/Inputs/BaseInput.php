@@ -1,16 +1,16 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Instance\Inputs;
+namespace Debuqer\Tika\Instance\Inputs;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\EventSubjectInterface;
-use Debuqer\TikaFormBuilder\Event\EventInterface;
-use Debuqer\TikaFormBuilder\Event\InputChangeEvent;
-use Debuqer\TikaFormBuilder\Form;
-use Debuqer\TikaFormBuilder\Instance\Inputs\Functionalities\SetPropertyInterface;
-use Debuqer\TikaFormBuilder\Instance\Instance;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
+use Debuqer\Tika\Event\EventInterface;
+use Debuqer\Tika\Event\InputChangeEvent;
+use Debuqer\Tika\Form;
+use Debuqer\Tika\Instance\Inputs\Functionalities\SetPropertyInterface;
+use Debuqer\Tika\Instance\Instance;
 
 abstract class BaseInput implements InputInterface, SetPropertyInterface, EventSubjectInterface
 {

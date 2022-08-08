@@ -1,14 +1,14 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Tests\Utils;
+namespace Debuqer\Tika\Tests\Utils;
 
-use Debuqer\TikaFormBuilder\Action\Types\SetItemVisibleStatus;
-use Debuqer\TikaFormBuilder\Action\Types\SetValue;
-use Debuqer\TikaFormBuilder\Action\Types\UnsetValue;
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
-use Debuqer\TikaFormBuilder\Tests\Action\SetItemVisibileStatusTest;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomAction;
-use Debuqer\TikaFormBuilder\Tests\TestClasses\MyCustomRuleReachAction;
+use Debuqer\Tika\Action\Types\SetItemVisibleStatus;
+use Debuqer\Tika\Action\Types\SetValue;
+use Debuqer\Tika\Action\Types\UnsetValue;
+use Debuqer\Tika\DataStructure\ConfigContainer;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\Tests\Action\SetItemVisibileStatusTest;
+use Debuqer\Tika\Tests\TestClasses\MyCustomAction;
+use Debuqer\Tika\Tests\TestClasses\MyCustomRuleReachAction;
 
 class ActionUtility
 {

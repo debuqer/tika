@@ -1,5 +1,5 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Instance\Inputs;
+namespace Debuqer\Tika\Instance\Inputs;
 
 class TextInput extends BaseInput
 {

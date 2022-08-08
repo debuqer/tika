@@ -1,5 +1,5 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Exceptions;
+namespace Debuqer\Tika\Exceptions;
 
 class InvalidItemConfig extends \Exception
 {

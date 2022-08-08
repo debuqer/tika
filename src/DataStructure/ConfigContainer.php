@@ -1,8 +1,8 @@
 <?php
-namespace Debuqer\TikaFormBuilder\DataStructure;
+namespace Debuqer\Tika\DataStructure;
 
 use Arrayy\Arrayy;
-use Debuqer\TikaFormBuilder\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 
 class ConfigContainer implements ConfigContainerInterface
 {

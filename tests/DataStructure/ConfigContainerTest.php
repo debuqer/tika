@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Debuqer\TikaFormBuilder\Tests\DataStructure;
+namespace Debuqer\Tika\Tests\DataStructure;
 
 
-use Debuqer\TikaFormBuilder\DataStructure\ConfigContainer;
+use Debuqer\Tika\DataStructure\ConfigContainer;
 
 class ConfigContainerTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Debuqer\TikaFormBuilder\Tests;
+namespace Debuqer\Tika\Tests;
 
-use Debuqer\TikaFormBuilder\Tests\Utils\FormUtility;
+use Debuqer\Tika\Tests\Utils\FormUtility;
 
 class BasicTestClass extends \PHPUnit\Framework\TestCase
 {
