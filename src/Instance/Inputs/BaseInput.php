@@ -119,4 +119,11 @@ abstract class BaseInput implements InputInterface, SetPropertyInterface, EventS
     {
         return $this->value_property_name;
     }
+
+    public function getItemValidations()
+    {
+        return [
+
+        ];
+    }
 }
