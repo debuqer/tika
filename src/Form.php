@@ -159,7 +159,10 @@ class Form implements \SplObserver, EventSubjectInterface
         foreach ($this->getInstance()->getItems()->toArray() as $itemId => $item) {
             if ( $item instanceof BaseInput ) {
                 $data[$itemId] = $item->get('value', null, true);
-                $rules[$itemId] = $item->get('validations', [], true)->toArray();
+
+                $customValidations = $item->get('validations', [], true)->toArray();
+                $inputValidations = $item->getItemValidations();
+                $rules[$itemId] = array_merge($customValidations, $inputValidations);
             }
         }
 

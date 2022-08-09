@@ -22,4 +22,6 @@ interface InputInterface
     public function setInstance(Instance &$instance);
 
     public function getInstance();
+
+    public function getItemValidations();
 }

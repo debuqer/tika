@@ -5,7 +5,7 @@ use Debuqer\Tika\DataStructure\ConfigContainer;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
 use Debuqer\Tika\Event\EventInterface;
-use Debuqer\Tika\Event\InputChangeEvent;
+use Debuqer\Tika\Event\AfterInputChangeEvent;
 use Debuqer\Tika\Event\InstanceChangeEvent;
 use Debuqer\Tika\Exceptions\InvalidInputProvider;
 use Debuqer\Tika\Exceptions\InvalidItemConfig;
@@ -111,7 +111,7 @@ class Instance implements EventSubjectInterface
     public function trigger(EventInterface $event)
     {
         if ( $this->getForm() ) {
-            if ( $event instanceof InputChangeEvent ) {
+            if ( $event instanceof AfterInputChangeEvent ) {
                 $this->trigger(new InstanceChangeEvent($this));
             }
 
