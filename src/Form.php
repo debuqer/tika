@@ -14,6 +14,7 @@ use Debuqer\Tika\Event\FormChangeEvent;
 use Debuqer\Tika\Event\FormLoadEvent;
 use Debuqer\Tika\Event\InstanceChangeEvent;
 use Debuqer\Tika\Instance\Inputs\BaseInput;
+use Debuqer\Tika\Instance\Inputs\NumericInput;
 use Debuqer\Tika\Instance\Inputs\TextInput;
 use Debuqer\Tika\Instance\Instance;
 use Debuqer\Tika\Validation\ValidationManager;
@@ -72,6 +73,7 @@ class Form implements \SplObserver, EventSubjectInterface
     {
         $providers->merge([
             'instance:text' => TextInput::class,
+            'instance:numeric' => NumericInput::class,
         ]);
 
         $this->instance = (new Instance($instance, $providers))->setForm($this);
@@ -192,5 +194,10 @@ class Form implements \SplObserver, EventSubjectInterface
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    public function isValid()
+    {
+        return empty($this->getErrors()->toArray());
     }
 }

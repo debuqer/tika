@@ -6,7 +6,8 @@ use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 class InputUtility
 {
     protected static $input_types = [
-        'text' => \Debuqer\Tika\Instance\Inputs\TextInput::class
+        'text' => \Debuqer\Tika\Instance\Inputs\TextInput::class,
+        'numeric' => \Debuqer\Tika\Instance\Inputs\NumericInput::class
     ];
 
     /**
