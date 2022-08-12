@@ -113,7 +113,7 @@ class ValidationManager implements ValidationManagerInterface
                 }
             }
 
-            if ( count($errors) ) {
+            if (count($errors)) {
                 $this->isValid = false;
             }
 
@@ -136,7 +136,7 @@ class ValidationManager implements ValidationManagerInterface
 
     protected function getItemConstraint($ruleName, $ruleParameters)
     {
-        if( isset($this->constraints[$ruleName]) ) {
+        if (isset($this->constraints[$ruleName])) {
             $className = $this->constraints[$ruleName];
 
             return new $className($ruleParameters);
