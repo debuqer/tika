@@ -3,10 +3,12 @@ namespace Debuqer\Tika\Instance\Inputs;
 
 class NumericInput extends BaseInput
 {
+    protected $type = 'integer';
+
     public function getItemValidations()
     {
         return [
-            'type' => ['type' => 'integer'],
+            'type' => ['type' => $this->type],
         ];
     }
 }
