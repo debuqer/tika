@@ -200,4 +200,11 @@ class Form implements \SplObserver, EventSubjectInterface
     {
         return empty($this->getErrors()->toArray());
     }
+
+    public function submit($data)
+    {
+        foreach ($data as $key => $value) {
+            $this->get($key)->setProperty('value', $value);
+        }
+    }
 }
