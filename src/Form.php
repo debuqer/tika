@@ -5,6 +5,7 @@ use Debuqer\Tika\Action\ActionManager;
 use Debuqer\Tika\Action\Types\ActionInterface;
 use Debuqer\Tika\Action\Types\SetValue;
 use Debuqer\Tika\Action\Types\UnsetValue;
+use Debuqer\Tika\Action\Types\Validate;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
 use Debuqer\Tika\Event\AfterValidateEvent;
@@ -12,8 +13,10 @@ use Debuqer\Tika\Event\BeforeValidateEvent;
 use Debuqer\Tika\Event\EventInterface;
 use Debuqer\Tika\Event\FormChangeEvent;
 use Debuqer\Tika\Event\FormLoadEvent;
+use Debuqer\Tika\Event\FormSubmitEvent;
 use Debuqer\Tika\Event\InstanceChangeEvent;
 use Debuqer\Tika\Instance\Inputs\BaseInput;
+use Debuqer\Tika\Instance\Inputs\NumericInput;
 use Debuqer\Tika\Instance\Inputs\TextInput;
 use Debuqer\Tika\Instance\Instance;
 use Debuqer\Tika\Validation\ValidationManager;
@@ -72,6 +75,7 @@ class Form implements \SplObserver, EventSubjectInterface
     {
         $providers->merge([
             'instance:text' => TextInput::class,
+            'instance:numeric' => NumericInput::class,
         ]);
 
         $this->instance = (new Instance($instance, $providers))->setForm($this);
@@ -82,6 +86,7 @@ class Form implements \SplObserver, EventSubjectInterface
         $providers->merge([
             'actions:set-value' => SetValue::class,
             'actions:unset-value' => UnsetValue::class,
+            'actions:validate' => Validate::class,
         ]);
 
         $this->actions = new ActionManager($actions, $providers);
@@ -192,5 +197,19 @@ class Form implements \SplObserver, EventSubjectInterface
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    public function isValid()
+    {
+        return empty($this->getErrors()->toArray());
+    }
+
+    public function submit($data)
+    {
+        foreach ($data as $key => $value) {
+            $this->get($key)->setProperty('value', $value);
+        }
+
+        $this->trigger(new FormSubmitEvent($this));
     }
 }

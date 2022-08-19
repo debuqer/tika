@@ -6,7 +6,7 @@ namespace Debuqer\Tika\Event;
 
 abstract class BaseEvent implements EventInterface
 {
-    /** @var \SplObjectStorage  */
+    /** @var \SplObjectStorage */
     protected \SplObjectStorage $observers;
 
     public $caller;

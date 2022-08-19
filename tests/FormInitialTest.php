@@ -114,4 +114,45 @@ class FormInitialTest extends BasicTestClass
             'my-custom-instance:lname' => []
         ], $form->getErrors()->toArray());
     }
+
+    public function test_submit_form()
+    {
+        $model_config = new ConfigContainer([
+            'instance' => [
+                'my-custom-instance:fname' => [],
+                'my-custom-instance:lname' => [],
+            ]
+        ]);
+        $form = FormUtility::createForm($model_config);
+        $form->submit([
+            'instance.my-custom-instance:fname' => 'john',
+            'instance.my-custom-instance:lname' => 'doe',
+        ]);
+
+        $this->assertEquals('john', $form->get('instance.my-custom-instance:fname.value'));
+
+        $this->assertEquals($form->getModelConfig(), $model_config);
+    }
+
+    public function test_validation_for_form()
+    {
+        $model_config = new ConfigContainer([
+            'instance' => [
+                'my-custom-instance:fname' => [],
+                'my-custom-instance:lname' => [],
+            ],
+            'actions' => [
+                'validate:submit' => [
+                    'event' => 'form.submit',
+                ]
+            ]
+        ]);
+        $form = FormUtility::createForm($model_config);
+        $form->submit([
+            'instance.my-custom-instance:fname' => 'john',
+            'instance.my-custom-instance:lname' => 'doe',
+        ]);
+
+        $this->assertEquals($form->getModelConfig(), $model_config);
+    }
 }

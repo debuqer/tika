@@ -1,12 +1,14 @@
 <?php
 namespace Debuqer\Tika\Instance\Inputs;
 
-class TextInput extends BaseInput
+class NumericInput extends BaseInput
 {
+    protected $type = 'integer';
+
     public function getItemValidations()
     {
         return [
-            'type' => ['type' => 'string']
+            'type' => ['type' => $this->type],
         ];
     }
 }

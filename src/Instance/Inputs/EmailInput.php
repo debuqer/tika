@@ -1,12 +1,12 @@
 <?php
 namespace Debuqer\Tika\Instance\Inputs;
 
-class TextInput extends BaseInput
+class EmailInput extends BaseInput
 {
     public function getItemValidations()
     {
         return [
-            'type' => ['type' => 'string']
+            'email' => []
         ];
     }
 }
