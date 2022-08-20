@@ -153,6 +153,7 @@ class FormInitialTest extends BasicTestClass
             'instance.my-custom-instance:lname' => 'doe',
         ]);
 
+        $this->assertTrue($form->isSubmitted());
         $this->assertEquals($form->getModelConfig(), $model_config);
     }
 }

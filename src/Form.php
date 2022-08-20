@@ -42,6 +42,8 @@ class Form implements \SplObserver, EventSubjectInterface
     /** @var  array */
     protected array $observers;
 
+    protected int $submitCounts = 0;
+
     public function __construct(ConfigContainerInterface $modelConfig)
     {
         $this->modelConfig = $modelConfig;
@@ -210,6 +212,12 @@ class Form implements \SplObserver, EventSubjectInterface
             $this->get($key)->setProperty('value', $value);
         }
 
+        $this->submitCounts ++;
         $this->trigger(new FormSubmitEvent($this));
+    }
+
+    public function isSubmitted()
+    {
+        return $this->submitCounts > 0;
     }
 }
