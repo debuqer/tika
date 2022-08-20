@@ -215,4 +215,9 @@ class Form implements \SplObserver, EventSubjectInterface
         $this->submitCounts ++;
         $this->trigger(new FormSubmitEvent($this));
     }
+
+    public function isSubmitted()
+    {
+        return $this->submitCounts > 0;
+    }
 }
