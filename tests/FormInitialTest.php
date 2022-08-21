@@ -156,4 +156,33 @@ class FormInitialTest extends BasicTestClass
         $this->assertTrue($form->isSubmitted());
         $this->assertEquals($form->getModelConfig(), $model_config);
     }
+
+    public function test_form_submit_validate_everything() {
+        $model_config = new ConfigContainer([
+            'instance' => [
+                'my-custom-instance:fname' => [
+                    'validations' => [
+                        'not-null' => ['message' => 'custom error message'],
+                    ]
+                ],
+                'my-custom-instance:lname' => [],
+            ],
+            'actions' => [
+                'validate:submit' => [
+                    'event' => 'form.submit',
+                ]
+            ]
+        ]);
+        $form = FormUtility::createForm($model_config);
+        $form->submit([
+        ]);
+
+        $this->assertTrue($form->isSubmitted());
+        $this->assertEquals([
+            'my-custom-instance:fname' => [
+                'custom error message'
+            ],
+            'my-custom-instance:lname' => []
+        ], $form->getErrors()->toArray());
+    }
 }
