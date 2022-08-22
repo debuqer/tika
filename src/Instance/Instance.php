@@ -4,6 +4,9 @@ namespace Debuqer\Tika\Instance;
 use Debuqer\Tika\DataStructure\ConfigContainer;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
+use Debuqer\Tika\DataStructure\DataContainers\Instance\ItemsDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\InstanceDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\ProvidersDataContainer;
 use Debuqer\Tika\Event\EventInterface;
 use Debuqer\Tika\Event\AfterInputChangeEvent;
 use Debuqer\Tika\Event\InstanceChangeEvent;
@@ -17,9 +20,9 @@ use Debuqer\Tika\Instance\Inputs\TextInput;
 class Instance implements EventSubjectInterface
 {
     /**
-     * @var ConfigContainerInterface
+     * @var ItemsDataContainer
      */
-    protected ConfigContainerInterface $items;
+    protected ItemsDataContainer $items;
     /**
      * @var ConfigContainerInterface
      */
@@ -29,15 +32,15 @@ class Instance implements EventSubjectInterface
      */
     protected $form;
 
-    public function __construct(ConfigContainerInterface $instanceConfig,
-                                ConfigContainerInterface $providers
+    public function __construct(InstanceDataContainer $instanceConfig,
+                                ProvidersDataContainer $providers
     )
     {
-        $this->items = new ConfigContainer([]);
+        $this->items = new ItemsDataContainer();
         $this->setProviders($providers);
 
         $items = $instanceConfig->toArray();
-        /** @var ConfigContainerInterface $item */
+        /** @var InstanceDataContainer $item */
         foreach ($items as $itemId => $itemConfig) {
             if( !is_array($itemConfig) ) {
                 throw new InvalidItemConfig(sprintf('Item %s config is not not valid', $itemId));
@@ -95,13 +98,13 @@ class Instance implements EventSubjectInterface
         return $this->form;
     }
 
-    protected function setProviders(ConfigContainerInterface $providers)
+    protected function setProviders(ProvidersDataContainer $providers)
     {
-        $this->providers = new ConfigContainer([
+        $this->providers = new ProvidersDataContainer([
 
         ]);
 
-        foreach ($providers->toArray() as $customProviderKey => $customProviderClass) {
+        foreach ($providers->all() as $customProviderKey => $customProviderClass) {
             if( strpos($customProviderKey, 'instance:') !== false ) {
                 $this->providers->merge([$customProviderKey => $customProviderClass]);
             }

@@ -6,6 +6,8 @@ namespace Debuqer\Tika\Action\Types;
 
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\Tika\DataStructure\Contracts\ExpressionEvaluatorInterface;
+use Debuqer\Tika\DataStructure\DataContainers\ActionDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\Instance\ParametersDataContainer;
 use Debuqer\Tika\DataStructure\ExpressionEvaluator;
 use Debuqer\Tika\Exceptions\InvalidActionConfiguration;
 use Debuqer\Tika\Form;
@@ -18,28 +20,10 @@ abstract class BaseAction implements ActionInterface
      * @var string
      */
     protected $name;
-
     /**
-     * Action configuration including event, conditions and other parameters
-     * @var ConfigContainerInterface
+     * @var ActionDataContainer
      */
-    protected $config;
-
-    /**
-     * Action event, like form.load
-     * @var string
-     */
-    protected $event;
-
-    /**
-     * @var ConfigContainerInterface
-     */
-    protected $conditions;
-
-    /**
-     * @var ConfigContainerInterface
-     */
-    protected $parameters;
+    protected $model;
 
     /**
      * @var ExpressionEvaluatorInterface
@@ -52,14 +36,11 @@ abstract class BaseAction implements ActionInterface
      * @param ConfigContainerInterface $config
      */
     public function __construct($name,
-                                ConfigContainerInterface $config
+                                ActionDataContainer $model
     )
     {
         $this->name = $name;
-        $this->event = $config->get('event', null);
-        $this->conditions = $config->get('conditions', 'true');
-        $this->parameters = $config->get();
-
+        $this->model = $model;
         $this->expressionLanguage = new ExpressionEvaluator();
 
         $this->validate();
@@ -78,7 +59,7 @@ abstract class BaseAction implements ActionInterface
      */
     public function getEvent()
     {
-        return $this->event;
+        return $this->model->getEvent();
     }
 
     /**
@@ -86,27 +67,27 @@ abstract class BaseAction implements ActionInterface
      */
     public function getConditions()
     {
-        return $this->conditions;
+        return $this->model->getConditions();
     }
 
     /**
-     * @return ConfigContainerInterface
+     * @return ParametersDataContainer
      */
     public function getParameters()
     {
-        return $this->parameters;
+        return $this->model->getParameters();
     }
 
     public function isRunnable(Form &$form)
     {
-        return $this->expressionLanguage->evaluate($this->conditions, [
+        return $this->expressionLanguage->evaluate($this->getConditions(), [
             'form' => $form
         ]);
     }
 
     public function validate()
     {
-        if( !$this->event ) {
+        if( !$this->getEvent() ) {
             throw new InvalidActionConfiguration(sprintf('Action %s must have valid event', $this->getName()));
         }
     }

@@ -24,7 +24,7 @@ class ActionTest extends BasicTestClass
 
     public function test_action_is_runnable_without_condition()
     {
-        $configContainer = new ConfigContainer([
+        $configContainer = [
             'instance' => [
                 'my-custom-instance:fname' => [],
                 'my-custom-instance:lname' => [],
@@ -34,7 +34,7 @@ class ActionTest extends BasicTestClass
                     'event' => 'form.load',
                 ],
             ],
-        ]);
+        ];
         $form = FormUtility::createForm($configContainer);
 
         $this->assertTrue($form->get('actions.my-custom-action:on-form-load')->isRunnable($form));
@@ -42,7 +42,7 @@ class ActionTest extends BasicTestClass
 
     public function test_action_is_runnable_with_condition()
     {
-        $configContainer = new ConfigContainer([
+        $configContainer = [
             'instance' => [
                 'my-custom-instance:fname' => [
                     'value' => 'a'
@@ -58,7 +58,7 @@ class ActionTest extends BasicTestClass
                     'conditions' => 'form.get("instance.my-custom-instance:fname.value") == "b"'
                 ],
             ],
-        ]);
+        ];
         $form = FormUtility::createForm($configContainer);
 
         $this->assertTrue($form->get('actions.my-custom-action:this-action')->isRunnable($form));

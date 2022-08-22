@@ -2,6 +2,7 @@
 namespace Debuqer\Tika\Action\Types;
 
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\DataContainers\ActionDataContainer;
 use Debuqer\Tika\Form;
 
 interface ActionInterface
@@ -9,10 +10,10 @@ interface ActionInterface
     /**
      * BaseAction constructor.
      * @param $name
-     * @param ConfigContainerInterface $config
+     * @param ActionDataContainer $config
      */
     public function __construct($name,
-                                ConfigContainerInterface $config
+                                ActionDataContainer $config
     );
     public function run(Form &$form);
 

@@ -9,6 +9,8 @@ use Debuqer\Tika\Action\Types\SetValue;
 use Debuqer\Tika\Action\Types\UnsetValue;
 use Debuqer\Tika\DataStructure\ConfigContainer;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\DataContainers\ActionsDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\ProvidersDataContainer;
 use Debuqer\Tika\Exceptions\InvalidInputProvider;
 use Debuqer\Tika\Exceptions\InvalidItemConfig;
 use Debuqer\Tika\Exceptions\InvalidItemIdKey;
@@ -31,14 +33,14 @@ class ActionManager
      * Provides a safe container for actions
      *
      * ActionManager constructor.
-     * @param ConfigContainerInterface $instanceConfig
-     * @param ConfigContainerInterface $providers
+     * @param ActionsDataContainer $instanceConfig
+     * @param ProvidersDataContainer $providers
      * @throws InvalidInputProvider
      * @throws InvalidItemConfig
      * @throws InvalidItemIdKey
      */
-    public function __construct(ConfigContainerInterface $instanceConfig,
-                                ConfigContainerInterface $providers
+    public function __construct(ActionsDataContainer $instanceConfig,
+                                ProvidersDataContainer $providers
     )
     {
         $this->items = new ConfigContainer([]);
@@ -91,9 +93,9 @@ class ActionManager
     /**
      * All action providers may register here
      *
-     * @param ConfigContainerInterface $providers
+     * @param ProvidersDataContainer $providers
      */
-    protected function setProviders(ConfigContainerInterface $providers)
+    protected function setProviders(ProvidersDataContainer $providers)
     {
         $this->providers = new ConfigContainer([
 

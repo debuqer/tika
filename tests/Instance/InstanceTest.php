@@ -73,8 +73,8 @@ class InstanceTest extends \PHPUnit\Framework\TestCase
 
     protected function createInstance($config_array, $providers_config)
     {
-        $config = new \Debuqer\Tika\DataStructure\ConfigContainer($config_array);
-        $providers = new \Debuqer\Tika\DataStructure\ConfigContainer($providers_config);
+        $config = new \Debuqer\Tika\DataStructure\DataContainers\InstanceDataContainer($config_array);
+        $providers = new \Debuqer\Tika\DataStructure\DataContainers\ProvidersDataContainer($providers_config);
 
         $providers->merge([
             'instance:my-custom-instance' => \Debuqer\Tika\Tests\TestClasses\MyCutsomInstance::class,

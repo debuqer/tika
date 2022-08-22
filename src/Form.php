@@ -8,6 +8,10 @@ use Debuqer\Tika\Action\Types\UnsetValue;
 use Debuqer\Tika\Action\Types\Validate;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
 use Debuqer\Tika\DataStructure\Contracts\EventSubjectInterface;
+use Debuqer\Tika\DataStructure\DataContainers\ActionsDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\FormDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\InstanceDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\ProvidersDataContainer;
 use Debuqer\Tika\Event\AfterValidateEvent;
 use Debuqer\Tika\Event\BeforeValidateEvent;
 use Debuqer\Tika\Event\EventInterface;
@@ -24,17 +28,14 @@ use SplSubject;
 
 class Form implements \SplObserver, EventSubjectInterface
 {
-    /** @var ConfigContainerInterface */
-    protected $modelConfig;
+    /** @var FormDataContainer */
+    protected $model;
 
     /** @var Instance */
     protected Instance $instance;
 
     /** @var ActionManager */
     protected ActionManager $actions;
-
-    /** @var ConfigContainerInterface */
-    protected ConfigContainerInterface $meta;
 
     /** @var ConfigContainerInterface */
     protected $errors;
@@ -44,36 +45,35 @@ class Form implements \SplObserver, EventSubjectInterface
 
     protected int $submitCounts = 0;
 
-    public function __construct(ConfigContainerInterface $modelConfig)
+    public function __construct(array $model)
     {
-        $this->modelConfig = $modelConfig;
+        $this->model = new FormDataContainer($model);
+
         $this->buildInstance(
-            $modelConfig->get('instance', []),
-            $modelConfig->get('providers', [])
+            $this->model->getInstances(),
+            $this->model->getProviders()
         );
 
         $this->buildActions(
-            $modelConfig->get('actions', []),
-            $modelConfig->get('providers', [])
+            $this->model->getActions(),
+            $this->model->getProviders()
         );
-
-        $this->meta = $modelConfig->get('meta', []);
 
         $this->trigger(new FormLoadEvent($this));
     }
 
     /**
-     * @return ConfigContainerInterface
+     * @return FormDataContainer
      */
-    public function getModelConfig()
+    public function getModel()
     {
-        return $this->modelConfig;
+        return $this->model;
     }
 
     /**
      * @param ConfigContainerInterface $instance
      */
-    protected function buildInstance(ConfigContainerInterface $instance, ConfigContainerInterface $providers)
+    protected function buildInstance(InstanceDataContainer $instance, ProvidersDataContainer $providers)
     {
         $providers->merge([
             'instance:text' => TextInput::class,
@@ -83,7 +83,7 @@ class Form implements \SplObserver, EventSubjectInterface
         $this->instance = (new Instance($instance, $providers))->setForm($this);
     }
 
-    protected function buildActions(ConfigContainerInterface $actions, ConfigContainerInterface $providers)
+    protected function buildActions(ActionsDataContainer $actions, ProvidersDataContainer $providers)
     {
         $providers->merge([
             'actions:set-value' => SetValue::class,
@@ -108,14 +108,6 @@ class Form implements \SplObserver, EventSubjectInterface
     public function getActions()
     {
         return $this->actions;
-    }
-
-    /**
-     * @return ConfigContainerInterface
-     */
-    public function getMeta()
-    {
-        return $this->meta;
     }
 
     public function get($key, $fallback = null)

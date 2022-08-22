@@ -6,6 +6,8 @@ use Debuqer\Tika\Action\Types\SetValue;
 use Debuqer\Tika\Action\Types\UnsetValue;
 use Debuqer\Tika\DataStructure\ConfigContainer;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\DataContainers\ActionDataContainer;
+use Debuqer\Tika\DataStructure\DataContainers\ActionsDataContainer;
 use Debuqer\Tika\Tests\Action\SetItemVisibileStatusTest;
 use Debuqer\Tika\Tests\TestClasses\MyCustomAction;
 use Debuqer\Tika\Tests\TestClasses\MyCustomRuleReachAction;
@@ -33,14 +35,9 @@ class ActionUtility
 
         $className = static::$action_types[$actionType];
 
-        /** @var ConfigContainerInterface $configContainer */
-        $configContainer = new ConfigContainer($config);
-        $configContainer->merge([
-            'providers' => [
-                'actions:my-custom' => MyCustomAction::class,
-                'actions:my-custom-rule-reach' => MyCustomRuleReachAction::class,
-            ]
-        ]);
+        /** @var ActionDataContainer $configContainer */
+        $configContainer = new ActionDataContainer($config);
+        $configContainer->merge([]);
 
         return new $className($actionName, $configContainer);
     }
