@@ -9,6 +9,7 @@ use Debuqer\Tika\Action\Types\SetValue;
 use Debuqer\Tika\Action\Types\UnsetValue;
 use Debuqer\Tika\DataStructure\ConfigContainer;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\DataContainers\ActionDataContainer;
 use Debuqer\Tika\DataStructure\DataContainers\ActionsDataContainer;
 use Debuqer\Tika\DataStructure\DataContainers\ProvidersDataContainer;
 use Debuqer\Tika\Exceptions\InvalidInputProvider;
@@ -72,7 +73,7 @@ class ActionManager
                     throw new InvalidInputProvider(sprintf('Action %s provider has not implemented ActionInterface', $itemType));
                 }
 
-                $item = new $itemProvider($itemName, new ConfigContainer($itemConfig));
+                $item = new $itemProvider($itemName, new ActionDataContainer($itemConfig));
             } else {
                 throw new InvalidItemIdKey(sprintf('Action %s type is not valid', $itemType));
             }

@@ -53,7 +53,7 @@ class ValidatorTest extends TestCase
 
     public function test_validation_in_form()
     {
-        $model_config = new ConfigContainer([
+        $model_config = [
             'instance' => [
                 'text:fname' => [
                     'validations' => ['not-null' => []],
@@ -62,7 +62,7 @@ class ValidatorTest extends TestCase
                     'validations' => ['not-null' => []],
                 ],
             ]
-        ]);
+        ];
 
         $form = new Form($model_config);
         $is_valid = $form->validate();

@@ -71,7 +71,11 @@ class Form implements \SplObserver, EventSubjectInterface
     }
 
     /**
-     * @param ConfigContainerInterface $instance
+     * @param InstanceDataContainer $instance
+     * @param ProvidersDataContainer $providers
+     * @throws Exceptions\InvalidInputProvider
+     * @throws Exceptions\InvalidItemConfig
+     * @throws Exceptions\InvalidItemIdKey
      */
     protected function buildInstance(InstanceDataContainer $instance, ProvidersDataContainer $providers)
     {
@@ -124,7 +128,7 @@ class Form implements \SplObserver, EventSubjectInterface
                 } if ( $block == 'actions' ) {
                     $currentItem = $currentItem->getActions()->getItems();
                 } if ( $block == 'meta' ) {
-                    $currentItem = $currentItem->getMeta();
+                    $currentItem = $this->model->getMeta();
                 }
             } else {
                 $currentItem = $currentItem->get($block, $fallback);
@@ -177,7 +181,7 @@ class Form implements \SplObserver, EventSubjectInterface
 
     public function update(SplSubject $event)
     {
-        $actions = $this->get('actions')->toArray();
+        $actions = $this->getActions();
         /** @var ActionInterface $action */
         foreach ($actions as $action) {
             if ( $action->getEvent() === $event->getName() ) {

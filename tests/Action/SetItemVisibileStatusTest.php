@@ -46,12 +46,12 @@ class SetItemVisibileStatusTest extends TestCase
     public function test_invalid_parameters_fails()
     {
         $this->expectException(InvalidActionConfiguration::class);
-        $configContainer = new ConfigContainer([
+        $configContainer = [
             'instance' => [
                 'text:fname' => [],
                 'text:lname' => [],
             ]
-        ]);
+        ];
         $form = FormUtility::createForm($configContainer);
 
         $this->expectException(InvalidActionConfiguration::class);

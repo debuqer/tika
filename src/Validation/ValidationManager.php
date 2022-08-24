@@ -5,6 +5,7 @@ namespace Debuqer\Tika\Validation;
 
 use Debuqer\Tika\DataStructure\ConfigContainer;
 use Debuqer\Tika\DataStructure\Contracts\ConfigContainerInterface;
+use Debuqer\Tika\DataStructure\DataContainers\ErrorsDataContainer;
 use Debuqer\Tika\Exceptions\InvalidValidationProvider;
 use Symfony\Component\Validator\Constraints as Assert;
 use Debuqer\Tika\DataStructure\Contracts\ValidationManagerInterface;
@@ -94,7 +95,7 @@ class ValidationManager implements ValidationManagerInterface
     public function __construct()
     {
         $this->validator = Validation::createValidator();
-        $this->errors = new ConfigContainer([]);
+        $this->errors = new ErrorsDataContainer([]);
     }
 
     public function validate($data, $rules = [])

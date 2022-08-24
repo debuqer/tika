@@ -18,11 +18,11 @@ class NumericInputTest extends \PHPUnit\Framework\TestCase
 
     public function test_numeric_validation()
     {
-        $model_config = new \Debuqer\Tika\DataStructure\ConfigContainer([
+        $model_config = [
             'instance' => [
                 'numeric:age' => [],
             ]
-        ]);
+        ];
         $form = \Debuqer\Tika\Tests\Utils\FormUtility::createForm($model_config);
         $form->get('instance.numeric:age')->setValue('hello');
 
